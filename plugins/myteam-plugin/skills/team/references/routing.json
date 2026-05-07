@@ -116,6 +116,32 @@
       "잘못된 상태"
     ]
   },
+  "coder": {
+    "keywords": [
+      "code",
+      "coding",
+      "implement",
+      "implementation",
+      "fix",
+      "modify",
+      "edit",
+      "patch",
+      "refactor",
+      "test",
+      "verify",
+      "validation",
+      "코드",
+      "구현",
+      "수정",
+      "고쳐",
+      "패치",
+      "리팩터링",
+      "테스트",
+      "검증",
+      "재수정",
+      "버그 수정"
+    ]
+  },
   "skill_evaluator": {
     "keywords": [
       "skill",

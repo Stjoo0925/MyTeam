@@ -25,6 +25,7 @@ plugins/
             pm.md
             frontend.md
             backend.md
+            coder.md
             architect.md
             domain.md
             qa.md
@@ -45,6 +46,7 @@ $team 이 요구사항을 MyTeam 관점으로 분석해줘
 PM, Frontend, Backend, Architect, Domain, QA, Skill Evaluator는 별도 명령이 아니라 `$team` 내부에서 필요한 경우에만 선택되는 역할입니다.
 
 `$team`은 PM 분석을 먼저 수행하고, PM 결과에 따라 필요한 전문 역할만 generic `worker` 또는 `explorer` 하위 에이전트에 위임한 뒤 결과를 병합하도록 설계되어 있습니다.
+실제 구현 또는 수정이 필요한 경우에는 내부 `Coder` 역할을 generic `worker`에 위임해 지정된 범위 안에서 수정, 검증, 실패 시 재수정을 수행합니다.
 실제 sub-agent 위임이 불가능한 환경에서는 그 사유를 명시하고 같은 순서의 역할 기반 분석으로 대체합니다.
 모든 실행 마지막에는 답변 품질을 자체 평가하고, 개선 후보가 있을 때만 `Skill Improvement Note`를 남깁니다.
 실제 스킬 파일 수정은 사용자가 명시적으로 요청한 경우에만 수행합니다.
