@@ -12,7 +12,13 @@
       "state",
       "accessibility",
       "responsive",
-      "rendering"
+      "rendering",
+      "화면",
+      "컴포넌트",
+      "상태관리",
+      "접근성",
+      "반응형",
+      "렌더링"
     ]
   },
   "backend": {
@@ -27,7 +33,16 @@
       "queue",
       "retry",
       "logging",
-      "docker"
+      "docker",
+      "백엔드",
+      "데이터베이스",
+      "인증",
+      "인가",
+      "트랜잭션",
+      "캐시",
+      "큐",
+      "재시도",
+      "로깅"
     ]
   },
   "architect": {
@@ -40,7 +55,15 @@
       "event",
       "integration",
       "realtime",
-      "upload"
+      "upload",
+      "아키텍처",
+      "서비스",
+      "경계",
+      "확장성",
+      "이벤트",
+      "통합",
+      "실시간",
+      "업로드"
     ]
   },
   "domain": {
@@ -53,7 +76,13 @@
       "coordinate",
       "geoid",
       "pointcloud",
-      "cp"
+      "cp",
+      "측량",
+      "좌표계",
+      "지오이드",
+      "점군",
+      "기준점",
+      "도메인"
     ]
   },
   "qa": {
@@ -66,7 +95,15 @@
       "duplicate",
       "rollback",
       "recovery",
-      "invalid"
+      "invalid",
+      "장애",
+      "실패",
+      "엣지",
+      "경쟁상태",
+      "중복",
+      "롤백",
+      "복구",
+      "잘못된 상태"
     ]
   },
   "skill_evaluator": {
@@ -81,12 +118,23 @@
       "output format",
       "regression",
       "improvement",
+      "subagent",
+      "sub-agent",
+      "worker",
+      "explorer",
+      "team",
+      "orchestrator",
       "스킬",
       "지침",
       "평가",
       "개선",
       "라우팅",
-      "응답 품질"
+      "응답 품질",
+      "하위 에이전트",
+      "서브에이전트",
+      "위임",
+      "팀",
+      "오케스트레이터"
     ]
   }
 }

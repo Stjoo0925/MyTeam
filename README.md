@@ -67,8 +67,25 @@ Codex에서 사용할 때는 다음처럼 호출합니다.
 $cto 이 요구사항을 CTO 관점으로 분석해줘
 ```
 
-`$cto`는 PM 하위 에이전트를 먼저 실행하고, PM 결과에 따라 필요한 전문 하위 에이전트만 위임한 뒤 결과를 병합하도록 설계되어 있습니다.
-실행 환경에서 sub-agent 도구가 허용되면 `$cto-pm`, `$cto-frontend`, `$cto-backend`, `$cto-architect`, `$cto-domain`, `$cto-qa`, `$cto-skill-evaluator`를 필요한 만큼 선택해 위임합니다.
+`$cto`는 하나의 CTO를 기준으로 PM과 필요한 전문가 팀을 구성하는 진입점입니다.
+항상 PM 역할을 먼저 위임하고, PM 결과에 따라 필요한 전문 역할만 선택한 뒤 CTO 관점으로 결과를 병합하도록 설계되어 있습니다.
+
+Codex 플러그인은 이름 있는 custom sub-agent를 직접 실행하는 런타임이 아닙니다.
+따라서 `$cto-pm` 같은 이름의 하위 에이전트 프로세스를 자동 실행한다고 가정하지 않습니다.
+실행 환경에서 sub-agent 도구가 허용되면 generic `worker` 또는 `explorer` 하위 에이전트를 생성하고, 그 프롬프트에 `$cto-pm`, `$cto-frontend`, `$cto-backend`, `$cto-architect`, `$cto-domain`, `$cto-qa`, `$cto-skill-evaluator` 역할 지침을 주입해 팀처럼 사용합니다.
+
+기대 흐름은 다음과 같습니다.
+
+```text
+$cto 호출
+-> CTO가 PM worker를 먼저 위임
+-> PM 결과로 필요한 전문 역할 선택
+-> 선택된 전문 역할만 worker/explorer로 위임
+-> CTO가 결과 충돌과 우선순위를 병합
+-> 최종 CTO 결정 출력
+```
+
+런타임 정책상 실제 sub-agent 위임이 불가능한 환경에서는 `$cto`가 그 사실을 명시하고 같은 순서의 역할 기반 분석으로 대체합니다.
 
 전문 관점만 직접 사용할 때는 다음처럼 호출합니다.
 
@@ -89,6 +106,7 @@ $cto-skill-evaluator CTO 스킬의 응답 행동을 평가해줘
 - 전문 관점별 세부 지침은 `skills/cto/references/agents/` 아래에서 관리합니다.
 - 라우팅 키워드는 `skills/cto/references/routing.json`에서 관리합니다.
 - 스킬 자체의 응답 행동 평가는 `skill_evaluator.md` 관점으로 관리합니다.
+- `$cto`는 전문 스킬을 단순히 나열하지 않고, 가능한 경우 generic 하위 에이전트에 역할 지침을 주입해 하나의 팀처럼 운용합니다.
 - 플러그인 등록 정보는 `plugins/cto-plugin/.codex-plugin/plugin.json`에서 관리합니다.
 - Codex UI 등록용 마켓플레이스 항목은 `.agents/plugins/marketplace.json`에서 관리합니다.
 

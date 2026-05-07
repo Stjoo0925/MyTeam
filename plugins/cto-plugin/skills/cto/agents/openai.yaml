@@ -1,0 +1,4 @@
+interface:
+  display_name: "CTO Team"
+  short_description: "PM을 먼저 위임하고 필요한 전문가 팀을 구성"
+  default_prompt: "$cto 이 요구사항을 CTO 팀 관점으로 분석해줘. PM을 먼저 위임하고 필요한 전문가만 실행해줘."
