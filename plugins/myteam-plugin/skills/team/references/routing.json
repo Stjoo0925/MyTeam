@@ -13,12 +13,12 @@
       "accessibility",
       "responsive",
       "rendering",
-      "화면",
-      "컴포넌트",
-      "상태관리",
-      "접근성",
-      "반응형",
-      "렌더링"
+      "screen",
+      "component structure",
+      "state management",
+      "loading",
+      "empty state",
+      "error state"
     ]
   },
   "backend": {
@@ -29,22 +29,18 @@
       "postgres",
       "redis",
       "auth",
+      "authentication",
+      "authorization",
       "transaction",
       "queue",
       "retry",
       "logging",
       "docker",
-      "code review",
-      "review",
-      "백엔드",
-      "데이터베이스",
-      "인증",
-      "인가",
-      "트랜잭션",
-      "캐시",
-      "큐",
-      "재시도",
-      "로깅"
+      "server",
+      "cache",
+      "concurrency",
+      "rate limit",
+      "session"
     ]
   },
   "architect": {
@@ -62,33 +58,30 @@
       "knowledge graph",
       "coupling",
       "chokepoint",
-      "아키텍처",
-      "서비스",
-      "경계",
-      "확장성",
-      "이벤트",
-      "통합",
-      "실시간",
-      "업로드"
+      "module separation",
+      "service boundary",
+      "data flow",
+      "event flow"
     ]
   },
   "domain": {
     "keywords": [
       "survey",
+      "surveying",
       "gis",
       "gnss",
       "slam",
       "cad",
       "coordinate",
+      "coordinate system",
       "geoid",
       "pointcloud",
+      "point cloud",
+      "control point",
       "cp",
-      "측량",
-      "좌표계",
-      "지오이드",
-      "점군",
-      "기준점",
-      "도메인"
+      "registration",
+      "field workflow",
+      "device compatibility"
     ]
   },
   "qa": {
@@ -97,7 +90,9 @@
       "retry",
       "failure",
       "edge",
+      "edge case",
       "race",
+      "race condition",
       "duplicate",
       "rollback",
       "recovery",
@@ -106,14 +101,9 @@
       "hotspot",
       "review question",
       "regression",
-      "장애",
-      "실패",
-      "엣지",
-      "경쟁상태",
-      "중복",
-      "롤백",
-      "복구",
-      "잘못된 상태"
+      "verification",
+      "partial failure",
+      "state inconsistency"
     ]
   },
   "coder": {
@@ -129,17 +119,10 @@
       "refactor",
       "test",
       "verify",
-      "validation",
-      "코드",
-      "구현",
-      "수정",
-      "고쳐",
-      "패치",
-      "리팩터링",
-      "테스트",
-      "검증",
-      "재수정",
-      "버그 수정"
+      "bug fix",
+      "change file",
+      "update code",
+      "add test"
     ]
   },
   "skill_evaluator": {
@@ -163,17 +146,9 @@
       "code-review-graph",
       "code review graph",
       "mcp",
-      "스킬",
-      "지침",
-      "평가",
-      "개선",
-      "라우팅",
-      "응답 품질",
-      "하위 에이전트",
-      "서브에이전트",
-      "위임",
-      "팀",
-      "오케스트레이터"
+      "delegation",
+      "role boundary",
+      "self-check"
     ]
   }
 }

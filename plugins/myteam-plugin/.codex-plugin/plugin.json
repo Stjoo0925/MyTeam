@@ -1,7 +1,7 @@
 {
   "name": "myteam-plugin",
   "version": "0.1.0",
-  "description": "개인 MyTeam Orchestrator 스킬 플러그인",
+  "description": "Personal MyTeam Orchestrator skill plugin",
   "author": {
     "name": "Personal",
     "email": "personal@example.com",
@@ -21,8 +21,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "MyTeam",
-    "shortDescription": "PM을 먼저 실행하고 필요한 전문가 팀만 구성하는 개인 MyTeam 스킬",
-    "longDescription": "하나의 팀 리더를 기준으로 PM과 필요한 전문 하위 에이전트 팀을 구성합니다. 요구사항을 먼저 PM 관점으로 분석하고, PM 결과에 따라 프론트엔드, 백엔드, 시스템 아키텍처, GIS/CAD 도메인, QA, 스킬 평가 역할 중 필요한 역할만 generic worker/explorer 하위 에이전트에 지침을 주입해 위임한 뒤 MyTeam 관점으로 기술 리스크, MVP 범위, 장기 유지보수 판단을 병합하는 개인 MyTeam Orchestrator 플러그인입니다.",
+    "shortDescription": "Runs PM analysis first and selects only the necessary specialist roles.",
+    "longDescription": "Acts like a team lead. It runs PM analysis first, then selects only the necessary roles among Frontend, Backend, Architect, Domain, QA, Coder, and Skill Evaluator. It merges requirement analysis, technical risk, MVP scope, operational stability, and long-term maintainability into a practical final decision.",
     "developerName": "Personal",
     "category": "Productivity",
     "capabilities": [
@@ -35,9 +35,9 @@
     "privacyPolicyURL": "https://github.com/Stjoo0925/MyTeam",
     "termsOfServiceURL": "https://github.com/Stjoo0925/MyTeam",
     "defaultPrompt": [
-      "$team 이 요구사항을 MyTeam 관점으로 분석해줘. PM을 먼저 실행하고 필요한 전문가만 위임해줘.",
-      "$team PM 분석 후 필요한 전문 역할만 골라 최종 결정을 내려줘.",
-      "$team 이 MyTeam 스킬의 하위 에이전트 위임 행동을 평가하고 개선점을 제안해줘."
+      "$team Analyze this requirement from the MyTeam perspective. Run PM analysis first and select only the necessary specialist roles.",
+      "$team Run PM analysis, select only the necessary specialist roles, and provide the final team decision.",
+      "$team Evaluate the sub-agent delegation behavior of this MyTeam skill and suggest improvements."
     ],
     "brandColor": "#2563EB",
     "composerIcon": "./assets/myteam.svg",
