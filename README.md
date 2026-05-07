@@ -87,6 +87,9 @@ $cto 호출
 
 런타임 정책상 실제 sub-agent 위임이 불가능한 환경에서는 `$cto`가 그 사실을 명시하고 같은 순서의 역할 기반 분석으로 대체합니다.
 
+코드 리뷰, 변경 영향도, 아키텍처 병목, 기술 부채, 테스트 사각지대 분석에서는 `$cto`가 관련 specialist에게 `code-review-graph` 도구 사용을 우선 검토하도록 지시합니다.
+도구가 없거나 실패하면 실패 사유를 기록하고 일반 코드 탐색과 git diff 기반 리뷰로 대체합니다.
+
 전문 관점만 직접 사용할 때는 다음처럼 호출합니다.
 
 ```text
@@ -107,6 +110,7 @@ $cto-skill-evaluator CTO 스킬의 응답 행동을 평가해줘
 - 라우팅 키워드는 `skills/cto/references/routing.json`에서 관리합니다.
 - 스킬 자체의 응답 행동 평가는 `skill_evaluator.md` 관점으로 관리합니다.
 - `$cto`는 전문 스킬을 단순히 나열하지 않고, 가능한 경우 generic 하위 에이전트에 역할 지침을 주입해 하나의 팀처럼 운용합니다.
+- 코드 리뷰 관련 도구 사용 규칙은 메인 `cto`, `cto-backend`, `cto-architect`, `cto-qa`, `cto-skill-evaluator` 스킬에서 관리합니다.
 - 플러그인 등록 정보는 `plugins/cto-plugin/.codex-plugin/plugin.json`에서 관리합니다.
 - Codex UI 등록용 마켓플레이스 항목은 `.agents/plugins/marketplace.json`에서 관리합니다.
 
