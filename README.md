@@ -45,6 +45,22 @@ plugins/
 
 `plugins/cto-plugin/skills/cto/SKILL.md`가 실제 CTO 스킬 진입점입니다.
 
+## 실제 설치 위치
+
+Codex 앱에서 인식되는 개인 플러그인 설치 위치는 아래 경로입니다.
+
+```text
+C:\Users\yusco\.codex\plugins\cache\personal-plugins\cto-plugin
+```
+
+설치된 마켓플레이스 파일은 캐시 루트 기준으로 관리합니다.
+
+```text
+C:\Users\yusco\.codex\plugins\cache\personal-plugins\.agents\plugins\marketplace.json
+```
+
+이때 `marketplace.json`의 플러그인 경로는 캐시 루트 기준으로 `./cto-plugin`을 사용합니다.
+
 Codex에서 사용할 때는 다음처럼 호출합니다.
 
 ```text
