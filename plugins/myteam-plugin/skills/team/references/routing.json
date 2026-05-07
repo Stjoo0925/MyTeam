@@ -1,4 +1,102 @@
 {
+  "executionModes": {
+    "light": {
+      "runIf": [
+        "simple_request",
+        "single_file_change",
+        "translation",
+        "ui_text_change",
+        "minor_refactor",
+        "small_frontend_fix"
+      ],
+      "skipIf": [
+        "authentication_change",
+        "database_schema_change",
+        "production_incident",
+        "large_refactor",
+        "new_feature_architecture",
+        "multi_agent_conflict_expected"
+      ],
+      "requiresPM": false,
+      "requiresCTO": false,
+      "maxSpecialists": 1,
+      "tokenBudget": "low"
+    },
+    "standard": {
+      "runIf": [
+        "medium_complexity",
+        "api_modification",
+        "frontend_backend_coordination",
+        "small_feature_implementation",
+        "focused_bug_fix"
+      ],
+      "requiresPM": true,
+      "requiresCTO": false,
+      "maxSpecialists": 2,
+      "tokenBudget": "medium"
+    },
+    "deep": {
+      "runIf": [
+        "authentication_change",
+        "authorization_change",
+        "database_schema_change",
+        "production_incident",
+        "large_refactor",
+        "new_feature_architecture",
+        "security_sensitive",
+        "high_risk_change"
+      ],
+      "requiresPM": true,
+      "requiresCTO": true,
+      "maxSpecialists": 6,
+      "tokenBudget": "high"
+    }
+  },
+  "router": {
+    "keywords": [
+      "route",
+      "router",
+      "execution mode",
+      "light mode",
+      "standard mode",
+      "deep mode",
+      "token efficiency",
+      "token minimization",
+      "agent selection",
+      "conditional execution"
+    ]
+  },
+  "cto": {
+    "keywords": [
+      "cto",
+      "orchestration",
+      "workflow",
+      "review loop",
+      "agent order",
+      "routing",
+      "context trimming",
+      "token budget",
+      "retry policy",
+      "conflict merge",
+      "output contract",
+      "tool dependency",
+      "mcp dependency",
+      "deployment version"
+    ],
+    "runIf": [
+      "deep_mode",
+      "multi_agent_conflict_expected",
+      "integration_risk",
+      "retry_escalation_required",
+      "validation_routing_required"
+    ],
+    "skipIf": [
+      "light_mode",
+      "single_specialist_sufficient",
+      "ui_only_change",
+      "translation_only"
+    ]
+  },
   "frontend": {
     "keywords": [
       "ui",
@@ -19,6 +117,15 @@
       "loading",
       "empty state",
       "error state"
+    ],
+    "runIf": [
+      "ui_change_required",
+      "frontend_state_involved",
+      "component_change_required"
+    ],
+    "skipIf": [
+      "backend_only_change",
+      "database_only_change"
     ]
   },
   "backend": {
@@ -41,6 +148,15 @@
       "concurrency",
       "rate limit",
       "session"
+    ],
+    "runIf": [
+      "api_change_required",
+      "database_involved",
+      "server_logic_change_required"
+    ],
+    "skipIf": [
+      "ui_only_change",
+      "translation_only"
     ]
   },
   "architect": {
@@ -62,6 +178,17 @@
       "service boundary",
       "data flow",
       "event flow"
+    ],
+    "runIf": [
+      "new_feature_architecture",
+      "service_boundary_change",
+      "large_refactor",
+      "scalability_risk"
+    ],
+    "skipIf": [
+      "small_fix",
+      "translation_only",
+      "ui_text_change"
     ]
   },
   "domain": {
@@ -82,6 +209,15 @@
       "registration",
       "field workflow",
       "device compatibility"
+    ],
+    "runIf": [
+      "domain_correctness_required",
+      "gis_or_cad_involved",
+      "surveying_workflow_involved"
+    ],
+    "skipIf": [
+      "generic_ui_change",
+      "generic_backend_change"
     ]
   },
   "qa": {
@@ -104,6 +240,47 @@
       "verification",
       "partial failure",
       "state inconsistency"
+    ],
+    "runIf": [
+      "deep_mode",
+      "regression_risk",
+      "failure_recovery_required",
+      "concurrency_risk",
+      "retry_logic_changed"
+    ],
+    "skipIf": [
+      "light_mode",
+      "translation_only",
+      "small_ui_text_change"
+    ]
+  },
+  "security": {
+    "keywords": [
+      "security",
+      "secret",
+      "permission",
+      "auth",
+      "authentication",
+      "authorization",
+      "token",
+      "jwt",
+      "session",
+      "injection",
+      "data exposure",
+      "privacy"
+    ],
+    "runIf": [
+      "authentication_change",
+      "authorization_change",
+      "secret_handling",
+      "permission_change",
+      "security_sensitive",
+      "data_exposure_risk"
+    ],
+    "skipIf": [
+      "ui_only_change",
+      "translation_only",
+      "documentation_only_without_security_scope"
     ]
   },
   "coder": {
@@ -123,6 +300,33 @@
       "change file",
       "update code",
       "add test"
+    ],
+    "runIf": [
+      "file_change_required",
+      "implementation_required",
+      "test_change_required"
+    ],
+    "skipIf": [
+      "analysis_only",
+      "architecture_discussion_only",
+      "unclear_scope"
+    ]
+  },
+  "integrator": {
+    "keywords": [
+      "integrate",
+      "integration",
+      "merge results",
+      "final response",
+      "contract merge"
+    ],
+    "runIf": [
+      "multiple_agent_outputs",
+      "deep_mode",
+      "standard_mode_with_multiple_specialists"
+    ],
+    "skipIf": [
+      "light_mode_single_specialist"
     ]
   },
   "skill_evaluator": {
@@ -143,6 +347,15 @@
       "explorer",
       "team",
       "orchestrator",
+      "cto",
+      "workflow version",
+      "prompt version",
+      "contract",
+      "contracts",
+      "evals",
+      "evaluation pipeline",
+      "version.json",
+      "changelog",
       "code-review-graph",
       "code review graph",
       "mcp",

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/myteam/agent-result.schema.json",
+  "title": "AgentResult",
+  "type": "object",
+  "required": [
+    "agent",
+    "status",
+    "summary",
+    "filesToModify",
+    "risks",
+    "requiresOtherAgents",
+    "confidence"
+  ],
+  "properties": {
+    "agent": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["success", "blocked", "failed", "needs_clarification"]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "filesToModify": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requiresOtherAgents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  },
+  "additionalProperties": false
+}

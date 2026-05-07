@@ -1,0 +1,31 @@
+{
+  "orchestrationVersion": "3.0.0",
+  "workflows": {
+    "light": "1.0.0",
+    "standard": "1.0.0",
+    "deep": "2.0.0"
+  },
+  "agents": {
+    "router": "1.0.0",
+    "pm": "1.2.0",
+    "cto": "2.0.0",
+    "frontend": "1.0.0",
+    "backend": "1.0.0",
+    "architect": "1.0.0",
+    "domain": "1.0.0",
+    "qa": "1.1.0",
+    "security": "1.0.0",
+    "coder": "1.2.0",
+    "integrator": "1.0.0",
+    "skill_evaluator": "1.2.0"
+  },
+  "contracts": {
+    "routerDecision": "2.0.0",
+    "agentResult": "1.0.0",
+    "teamOrchestration": "2.0.0"
+  },
+  "policies": {
+    "contextCompression": "1.0.0",
+    "retryEscalation": "1.0.0"
+  }
+}

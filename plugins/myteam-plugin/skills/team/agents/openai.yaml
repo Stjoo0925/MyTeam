@@ -1,4 +1,4 @@
 interface:
   display_name: "MyTeam"
-  short_description: "Runs PM analysis first and selects only the necessary specialist roles."
-  default_prompt: "$team Analyze this requirement from the MyTeam perspective. Run PM analysis first and select only the necessary specialist roles."
+  short_description: "Routes first, minimizes agents, and uses contract-based Light, Standard, or Deep execution."
+  default_prompt: "$team Route this request, choose Light, Standard, or Deep mode, execute only required agents, and provide the final team decision."

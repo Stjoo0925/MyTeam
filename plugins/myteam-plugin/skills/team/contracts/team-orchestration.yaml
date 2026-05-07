@@ -1,0 +1,135 @@
+name: team-orchestration
+version: 2.0.0
+description: Contract for MyTeam Router, optional PM, conditional CTO, specialist, validation, integration, and final response flow.
+
+input:
+  requirement_spec:
+    type: string
+    required: true
+    description: User request restated as an actionable requirement.
+  priority:
+    type: enum
+    values:
+      - low
+      - medium
+      - high
+      - urgent
+    required: true
+  constraints:
+    type: array
+    items: string
+    required: true
+  available_context:
+    type: array
+    items: string
+    required: true
+  requested_scope:
+    type: string
+    required: true
+
+router_decision:
+  mode:
+    type: enum
+    values:
+      - light
+      - standard
+      - deep
+    required: true
+  taskType:
+    type: string
+    required: true
+  requiredAgents:
+    type: array
+    items: string
+    required: true
+  requiresPM:
+    type: boolean
+    required: true
+  requiresCTO:
+    type: boolean
+    required: true
+  requiresQA:
+    type: boolean
+    required: true
+  requiresSecurity:
+    type: boolean
+    required: true
+  tokenBudget:
+    type: enum
+    values:
+      - low
+      - medium
+      - high
+    required: true
+
+agent_result:
+  agent:
+    type: string
+    required: true
+  status:
+    type: enum
+    values:
+      - success
+      - blocked
+      - failed
+      - needs_clarification
+    required: true
+  summary:
+    type: string
+    required: true
+  filesToModify:
+    type: array
+    items: string
+    required: true
+  risks:
+    type: array
+    items: string
+    required: true
+  requiresOtherAgents:
+    type: array
+    items: string
+    required: true
+  confidence:
+    type: number
+    minimum: 0
+    maximum: 1
+    required: true
+
+output:
+  implementation_plan:
+    type: array
+    items: string
+    required: true
+  assigned_agents:
+    type: array
+    items: string
+    required: true
+  risk_report:
+    type: array
+    items: string
+    required: true
+  decisions:
+    type: array
+    items: string
+    required: true
+  verification:
+    type: array
+    items: string
+    required: true
+  remaining_risks:
+    type: array
+    items: string
+    required: true
+
+normalization_policy:
+  allowed:
+    - Fill missing optional details from explicit PM, CTO, or specialist output.
+    - Collapse duplicate risks when meaning is equivalent.
+    - Rename fields to the canonical contract names when intent is clear.
+  forbidden:
+    - Invent missing business rules.
+    - Invent verification results.
+    - Treat failed tool calls as successful.
+    - Expand implementation scope without user approval.
+    - Transfer full conversation history between agents.
+    - Transfer long-form reasoning between agents.

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/myteam/router-decision.schema.json",
+  "title": "RouterDecision",
+  "type": "object",
+  "required": [
+    "mode",
+    "taskType",
+    "requiredAgents",
+    "requiresPM",
+    "requiresCTO",
+    "requiresQA",
+    "requiresSecurity",
+    "tokenBudget"
+  ],
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": ["light", "standard", "deep"]
+    },
+    "taskType": {
+      "type": "string"
+    },
+    "requiredAgents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "requiresPM": {
+      "type": "boolean"
+    },
+    "requiresCTO": {
+      "type": "boolean"
+    },
+    "requiresQA": {
+      "type": "boolean"
+    },
+    "requiresSecurity": {
+      "type": "boolean"
+    },
+    "tokenBudget": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "reason": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

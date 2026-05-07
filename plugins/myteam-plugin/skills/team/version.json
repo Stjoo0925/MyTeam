@@ -1,0 +1,50 @@
+{
+  "name": "team",
+  "version": "0.3.0",
+  "promptVersion": "3.0.0",
+  "workflowVersion": "3.0.0",
+  "contractVersion": "2.0.0",
+  "deployment": {
+    "dev": "0.3.0",
+    "staging": null,
+    "prod": "0.1.0"
+  },
+  "roles": {
+    "router": "1.0.0",
+    "pm": "1.2.0",
+    "cto": "2.0.0",
+    "frontend": "1.0.0",
+    "backend": "1.0.0",
+    "architect": "1.0.0",
+    "domain": "1.0.0",
+    "qa": "1.1.0",
+    "security": "1.0.0",
+    "coder": "1.2.0",
+    "integrator": "1.0.0",
+    "skill_evaluator": "1.2.0"
+  },
+  "dependencies": {
+    "code-review-graph": "optional",
+    "worker-agent": "runtime-provided",
+    "explorer-agent": "runtime-provided"
+  },
+  "semverPolicy": {
+    "major": [
+      "Role responsibility changes",
+      "Orchestration structure changes that break existing behavior",
+      "Breaking output contract changes"
+    ],
+    "minor": [
+      "New role capability",
+      "New workflow stage",
+      "New tool dependency",
+      "Backward-compatible contract expansion"
+    ],
+    "patch": [
+      "Prompt wording change",
+      "Output stability improvement",
+      "Bug fix",
+      "Documentation clarification"
+    ]
+  }
+}
