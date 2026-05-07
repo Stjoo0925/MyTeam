@@ -54,7 +54,10 @@ The Router may use field philosophy anchors to improve classification, but it mu
     "allowedAgentType": "none",
     "maxSubAgents": 0,
     "reason": "Single specialist can safely complete the task.",
-    "skipReason": "Delegation would add overhead without distinct ownership."
+    "skipReason": "Delegation would add overhead without distinct ownership.",
+    "runtimeSubAgentsAvailable": true,
+    "distinctOwnershipReason": "No delegated ownership is needed for this isolated frontend fix.",
+    "blockingReasonIfNotDelegated": "Simple final-answer or one-specialist work."
   },
   "overuseGuard": {
     "singleAgentSufficient": true,
@@ -80,4 +83,7 @@ The Router may use field philosophy anchors to improve classification, but it mu
 - Skip Contract Officer only for simple final-answer work with no delegation and low contract risk.
 - Set `delegation.shouldDelegate: true` when `$team` or `$myteam-plugin:team` is invoked for non-trivial analysis, multi-file comparison, database schema migration planning, production-risk assessment, implementation, verification, review, or impact analysis and the runtime provides explorer or worker agents.
 - Set `delegation.shouldDelegate: false` only for simple final-answer work, unclear scope, unavailable runtime agents, or work that would duplicate the team lead's immediate blocking task.
+- Always fill `distinctOwnershipReason` and `blockingReasonIfNotDelegated`; missing either field is a router contract failure.
+- Always fill `runtimeSubAgentsAvailable`; if it is true in Deep Mode, `delegation.shouldDelegate` must be true.
+- In Deep Mode, `requiresContractOfficer` must be true and `contractOfficerMode` must be `assign_and_validate`.
 - Every skipped role must be listed with a concrete exclusion reason.

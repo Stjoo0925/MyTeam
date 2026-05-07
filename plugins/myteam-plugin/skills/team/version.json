@@ -1,9 +1,9 @@
 {
   "name": "team",
   "version": "0.5.1",
-  "promptVersion": "3.3.1",
+  "promptVersion": "3.3.3",
   "workflowVersion": "3.1.0",
-  "contractVersion": "2.2.0",
+  "contractVersion": "2.3.0",
   "deployment": {
     "dev": "0.5.1",
     "staging": null,

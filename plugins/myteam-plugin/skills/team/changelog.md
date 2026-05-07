@@ -5,6 +5,8 @@
 - Clarified that `$team` and `$myteam-plugin:team` authorize actual runtime sub-agent delegation when eligible.
 - Prevented token-efficiency rules from collapsing non-trivial team requests into local-only analysis.
 - Added a database migration delegation regression scenario for production data-preservation work.
+- Added guards against merging timed-out duplicate delegation and downplaying conditional production risks.
+- Strengthened contracts with mandatory quality gates, final decision values, unavailable result handling, and distinct delegation ownership fields.
 
 ## 0.5.0
 

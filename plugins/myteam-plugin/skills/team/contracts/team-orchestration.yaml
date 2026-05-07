@@ -1,5 +1,5 @@
 name: team-orchestration
-version: 2.2.0
+version: 2.3.0
 description: Strong contract for MyTeam Router, Contract Officer, optional PM, conditional CTO, specialist, validation, delegation, integration, and final response flow.
 
 input:
@@ -106,6 +106,15 @@ router_decision:
       skipReason:
         type: string
         required: true
+      runtimeSubAgentsAvailable:
+        type: boolean
+        required: true
+      distinctOwnershipReason:
+        type: string
+        required: true
+      blockingReasonIfNotDelegated:
+        type: string
+        required: true
   overuseGuard:
     type: object
     required: true
@@ -124,6 +133,62 @@ router_decision:
       scopeLimit:
         type: string
         required: true
+
+mandatory_quality_gates:
+  router_first:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: reject_output
+    description: Router decision must exist before PM, CTO, specialist, QA, Security, Coder, Integrator, or final answer work.
+  required_roles_executed_or_blocked:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: reject_output
+    description: Every Router-selected required role must either produce an accepted contract or be explicitly marked unavailable, blocked, skipped by a newer instruction, or blocked by tool policy.
+  contract_officer_before_delegation:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: reject_output
+    description: When delegation, implementation, or contract validation is required, Contract Officer assignment must happen before specialist execution.
+  distinct_delegation_ownership:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: reject_output
+    description: Delegated agents must have distinct owned scopes; duplicate confidence-check delegation is invalid.
+  delegated_outputs_validated:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: reject_output
+    description: Delegated outputs must be validated before Integrator, CTO Integration, or final response consumes them.
+  unavailable_outputs_excluded:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: reject_output
+    description: Timed-out, unavailable, rejected, or malformed delegated outputs must not be merged into Specialist Results or presented as validation.
+  verification_honesty:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: reject_output
+    description: Failed, blocked, skipped, or not-run verification must be reported as such and cannot be normalized into success.
+  conditional_risk_not_downplayed:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: revise
+    description: Conditional data-loss, migration, security, or production-regression risks must be promoted to findings instead of buried after a no-issues statement.
+  final_decision_present:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: revise
+    description: Review, migration, impact, and production-risk answers must end with a clear final decision.
 
 contract_officer_assignment:
   assignmentId:
@@ -223,6 +288,7 @@ agent_result:
       - blocked
       - failed
       - needs_clarification
+      - unavailable
     required: true
   summary:
     type: string
@@ -403,6 +469,25 @@ output:
     type: array
     items: string
     required: true
+  findings:
+    type: array
+    items: string
+    required: true
+    description: Findings must lead review, migration, impact, and production-risk responses. Conditional risks with material impact belong here.
+  validation_limits:
+    type: array
+    items: string
+    required: true
+    description: Tool failures, timed-out delegated outputs, skipped tests, unavailable repositories, and sandbox limits belong here.
+  final_decision:
+    type: enum
+    values:
+      - safe_as_is
+      - safe_with_conditions
+      - unsafe_until_fixed
+      - blocked_pending_information
+    required: true
+    description: Final team decision. For non-review planning answers, choose the closest status based on known risks and missing information.
 
 normalization_policy:
   allowed:
@@ -413,6 +498,8 @@ normalization_policy:
     - Invent missing business rules.
     - Invent verification results.
     - Treat failed tool calls as successful.
+    - Treat timed-out, unavailable, rejected, or malformed delegated outputs as successful.
+    - Say no important issue was found when conditional data loss, migration failure, security exposure, or production regression remains possible.
     - Expand implementation scope without user approval.
     - Transfer full conversation history between agents.
     - Transfer long-form reasoning between agents.
@@ -425,15 +512,22 @@ strength_policy:
     - Contract Officer must validate delegated outputs before Integrator or CTO Integration consumes them.
     - Strong execution must use available capabilities decisively when the router marks them required.
     - Delegation must occur when the task is non-trivial, parallelizable, and the runtime provides suitable explorer or worker agents.
-    - Delegation must not occur when one specialist can safely complete the task, when the scope is unclear, or when delegation would duplicate current work.
+    - Delegation must not occur when the task is simple final-answer work, when the scope is unclear, or when delegation would duplicate current work.
     - Every skipped agent must have an explicit exclusion reason.
     - Every delegated agent must receive owned scope, forbidden scope, compressed context, and the expected output contract.
     - Every delegated agent must receive assignment id, success criteria, failure criteria, verification requirement, and accountability policy.
     - Every implementation result must report feasible verification or a concrete reason verification was blocked.
+    - "Every delegated output consumed by Integrator or final response must have Contract Officer decision accept."
+    - Timed-out, unavailable, rejected, or malformed delegated outputs must be reported only as validation limits unless they block the decision.
+    - Review, impact, migration, and production-risk responses must lead with findings or a clear team decision.
+    - Conditional production risks must be classified as findings with condition, impact, evidence, and required action.
+    - "Final response must include one final decision value: safe_as_is, safe_with_conditions, unsafe_until_fixed, or blocked_pending_information."
   forbidden:
     - Skipping required routing because the answer seems simple.
     - Treating internal roles as optional when the router selected them.
     - Creating PM, CTO, QA, Security, or multiple specialists for ceremony.
     - Delegating the same unresolved task to multiple agents without distinct ownership.
     - Reporting strong execution when contract validation, scope control, or verification was omitted.
+    - Reporting a timed-out or unavailable delegated agent as successful validation.
+    - Burying conditional data-loss, migration, security, or production-regression risk after a no-issues statement.
     - Using threats, fake rewards, or emotional coercion as a substitute for contract clarity.

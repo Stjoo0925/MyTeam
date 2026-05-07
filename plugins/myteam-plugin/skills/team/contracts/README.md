@@ -23,3 +23,12 @@ Contract rules:
 - Sub-agent delegation is forbidden when it duplicates work, expands scope, or replaces a simple single-agent path.
 - Agent results must include assignment id, owned scope, forbidden scope, verification status, contract compliance status, accountability score delta, and Contract Officer decision.
 - Accountability scoring is an internal routing signal. Emotional threats, punishment language, and false rewards are forbidden.
+
+Mandatory quality gates:
+
+- Router-first execution, required-role execution/blocking, Contract Officer assignment before delegation, and validation before integration are required contract gates.
+- Duplicate confidence-check delegation is contract-invalid unless each agent has distinct owned scope.
+- Timed-out, unavailable, malformed, or rejected delegated outputs must not be merged as accepted Specialist Results.
+- Failed, blocked, or not-run verification must remain visible in final validation limits.
+- Conditional data-loss, migration, security, or production-regression risk must be promoted to a finding and reflected in the final decision.
+- Final review and migration answers must produce one decision value: `safe_as_is`, `safe_with_conditions`, `unsafe_until_fixed`, or `blocked_pending_information`.

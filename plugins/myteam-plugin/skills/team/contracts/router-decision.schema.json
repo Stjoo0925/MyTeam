@@ -83,6 +83,45 @@
           },
           "tokenBudget": {
             "enum": ["medium", "high"]
+          },
+          "requiresContractOfficer": {
+            "const": true
+          },
+          "contractOfficerMode": {
+            "const": "assign_and_validate"
+          },
+          "requiresContractOfficer": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "deep"
+          },
+          "delegation": {
+            "properties": {
+              "runtimeSubAgentsAvailable": {
+                "const": true
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "delegation": {
+            "properties": {
+              "shouldDelegate": {
+                "const": true
+              },
+              "maxSubAgents": {
+                "minimum": 1
+              }
+            }
           }
         }
       }
@@ -258,7 +297,10 @@
         "allowedAgentType",
         "maxSubAgents",
         "reason",
-        "skipReason"
+        "skipReason",
+        "runtimeSubAgentsAvailable",
+        "distinctOwnershipReason",
+        "blockingReasonIfNotDelegated"
       ],
       "properties": {
         "shouldDelegate": {
@@ -280,6 +322,20 @@
         "skipReason": {
           "type": "string",
           "minLength": 1
+        },
+        "runtimeSubAgentsAvailable": {
+          "type": "boolean",
+          "description": "Whether the current runtime provides usable explorer or worker sub-agents for this request."
+        },
+        "distinctOwnershipReason": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Why delegated ownership is distinct from the team lead and other agents, or why no delegation is valid."
+        },
+        "blockingReasonIfNotDelegated": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Required when shouldDelegate is false for non-trivial work; state simple final-answer work, unclear scope, unavailable agents, or higher-priority policy."
         }
       },
       "additionalProperties": false

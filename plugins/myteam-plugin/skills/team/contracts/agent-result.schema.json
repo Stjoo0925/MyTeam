@@ -42,7 +42,14 @@
       "then": {
         "properties": {
           "status": {
-            "enum": ["failed", "blocked", "needs_clarification"]
+            "enum": ["failed", "blocked", "needs_clarification", "unavailable"]
+          },
+          "contractOfficerDecision": {
+            "properties": {
+              "decision": {
+                "enum": ["retry", "revise", "escalate_to_cto", "ask_user", "reject_output"]
+              }
+            }
           }
         }
       }
@@ -67,6 +74,46 @@
                 "const": true
               }
             }
+          },
+          "status": {
+            "const": "success"
+          },
+          "verification": {
+            "properties": {
+              "result": {
+                "enum": ["passed", "not_run", "blocked"]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "unavailable"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "contractCompliance": {
+            "properties": {
+              "valid": {
+                "const": false
+              }
+            }
+          },
+          "contractOfficerDecision": {
+            "properties": {
+              "decision": {
+                "enum": ["retry", "ask_user", "reject_output", "escalate_to_cto"]
+              }
+            }
+          },
+          "confidence": {
+            "maximum": 0.4
           }
         }
       }
@@ -117,7 +164,7 @@
     },
     "status": {
       "type": "string",
-      "enum": ["success", "blocked", "failed", "needs_clarification"]
+      "enum": ["success", "blocked", "failed", "needs_clarification", "unavailable"]
     },
     "summary": {
       "type": "string",

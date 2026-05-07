@@ -103,7 +103,10 @@ Router output contract:
     "allowedAgentType": "none",
     "maxSubAgents": 0,
     "reason": "Single specialist can safely complete the task.",
-    "skipReason": "Delegation would add overhead without distinct ownership."
+    "skipReason": "Delegation would add overhead without distinct ownership.",
+    "runtimeSubAgentsAvailable": true,
+    "distinctOwnershipReason": "No delegated ownership is needed for the isolated frontend label change.",
+    "blockingReasonIfNotDelegated": "Simple final-answer or one-specialist work."
   },
   "overuseGuard": {
     "singleAgentSufficient": true,
@@ -218,6 +221,19 @@ PM analysis must be summarized before transfer:
 
 Agents must not exchange raw conversational outputs. Every agent handoff must use a structured contract.
 
+Delegation and final response quality gates are mandatory contract checks, not style preferences. If any gate fails, the output must be revised, retried, rejected, escalated, or marked blocked instead of being normalized into success.
+
+Mandatory gates:
+
+- Router must run before any role execution or final answer.
+- Router-selected required roles must be executed, explicitly blocked, or explicitly unavailable.
+- Contract Officer must assign before delegated specialist execution and validate before integration.
+- Delegated scopes must be distinct; duplicate confidence-check agents are contract-invalid.
+- Timed-out, unavailable, malformed, or rejected delegated outputs must not be merged as Specialist Results.
+- Verification status must be honest; failed, blocked, not-run, or sandbox-limited verification cannot be described as passed.
+- Conditional data-loss, migration, security, or production-regression risk must be promoted to a finding.
+- Review, migration, impact, and production-risk answers must end with `safe_as_is`, `safe_with_conditions`, `unsafe_until_fixed`, or `blocked_pending_information`.
+
 Default agent result contract:
 
 ```json
@@ -305,6 +321,8 @@ When sub-agents can be created, follow these rules:
 - For `$team` or `$myteam-plugin:team`, delegation is expected for non-trivial analysis, comparison of multiple files, database schema migration planning, production-risk assessment, implementation, verification, review, or impact analysis when runtime sub-agents are available.
 - Delegate when the task is non-trivial, parallelizable, has distinct ownership, and the runtime provides suitable sub-agents.
 - Do not delegate when the task is simple final-answer work, when the scope is unclear, or when delegation would duplicate current work.
+- Do not spawn a sub-agent only for duplicate confidence checking after the team lead has already taken the same ownership scope. If a delegated task is useful, give it a distinct scope such as SQL diff extraction, code usage tracing, migration safety review, QA validation, or security review.
+- If a delegated agent times out or returns no usable contract, mark that output as `unavailable`, exclude it from Specialist Results, and do not present the run as successful delegation. Retry only when the result is needed for the next decision and the scope remains clear.
 - Each delegated prompt must include role name, focus scope, forbidden scope, and expected output format.
 - Each delegated prompt must include the Contract Officer assignment and accountability policy.
 - Each delegated prompt must reference the expected input and output contract.
@@ -469,6 +487,15 @@ Include `Skill Evaluation` only when the user asks for skill improvement, behavi
 
 Include `Skill Improvement Note` only when a real improvement candidate exists. Keep it to 1-3 short items at the end. Do not automatically edit skill files unless the user explicitly asks for that.
 
+For review, impact analysis, schema migration, or production-risk answers:
+
+- Lead with actionable findings or decisions, not a process transcript.
+- Do not say "no important issue was found" when the answer contains a condition that could cause data loss, failed migration, security exposure, or production regression. Classify it as a conditional finding and state the exact condition.
+- Keep tool failures and unavailable delegated outputs in `Validation` or `Risks`, not in the main decision unless they change the recommendation.
+- Use file and line references only when they support a finding or decision. Do not list every searched area.
+- Separate verified facts from assumptions and required operator checks.
+- End with a clear team decision: safe as-is, safe with conditions, unsafe until fixed, or blocked pending missing information.
+
 ## Self-Check
 
 Before the final response, verify:
@@ -482,6 +509,8 @@ Before the final response, verify:
 - Are exclusions for unused roles reasonable?
 - Was context compressed before agent handoff?
 - Did all agent handoffs use structured contracts?
+- Did every delegated agent have distinct ownership from the team lead and other agents?
+- If a delegated agent timed out, was its output excluded or retried instead of being normalized into success?
 - Did assigned agents receive assignment id, owned scope, forbidden scope, verification requirement, and accountability policy?
 - Were failed contracts retried, revised, escalated, clarified, or rejected instead of normalized into success?
 - Was the Coder used only for actual edit requests?
@@ -489,5 +518,6 @@ Before the final response, verify:
 - Were retry and escalation policies applied selectively?
 - Was code-review-graph availability checked for tasks that need it?
 - Does the final decision include priorities and tradeoffs instead of a plain summary?
+- For review or migration work, did the answer avoid downplaying conditional data-loss, migration, security, or production risks?
 - Were uncertain or missing requirements handled with questions instead of speculation?
 - Were field philosophy anchors applied only where relevant and without over-expanding scope?

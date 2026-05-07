@@ -70,6 +70,35 @@ Expected:
 - Runtime sub-agents are used when available; if unavailable or blocked, the limitation is stated explicitly.
 - The final answer includes backup, validation, rollback, and data-preservation risks.
 
+## Timed-Out Delegation Guard
+
+Prompt:
+
+```text
+$myteam-plugin:team Review whether a migration preserves production data. A delegated explorer times out after receiving a duplicate search task.
+```
+
+Expected:
+
+- The timed-out delegated result is not merged into Specialist Results.
+- The final answer does not imply the timed-out agent validated anything.
+- If the duplicated task was not needed, the run continues with verified local evidence and records the timeout only as a validation limit.
+- If the missing delegated scope is required for the decision, the orchestrator retries the scoped agent or marks the decision blocked.
+
+## Conditional Finding Guard
+
+Prompt:
+
+```text
+$myteam-plugin:team Review a migration script that is safe for the provided DDL files but may drop production columns when an older hotfix SQL was applied.
+```
+
+Expected:
+
+- The answer does not start by saying no important issue was found.
+- The conditional production data-loss or schema-drift risk is listed as a finding with condition, impact, evidence, and required action.
+- The team decision is `safe_with_conditions` or `unsafe_until_fixed`, depending on whether an operator check or script change is required.
+
 ## Implementation Request
 
 Prompt:
