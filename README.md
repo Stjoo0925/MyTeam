@@ -112,13 +112,13 @@ MyTeam follows Semantic Versioning for skill and contract changes.
 An example personal plugin cache location recognized by the Codex app:
 
 ```text
-C:\Users\yusco\.codex\plugins\cache\personal-plugins\myteam-plugin
+C:\Users\{userName}\.codex\plugins\cache\personal-plugins\myteam-plugin
 ```
 
 The marketplace file is managed relative to the cache root:
 
 ```text
-C:\Users\yusco\.codex\plugins\cache\personal-plugins\.agents\plugins\marketplace.json
+C:\Users\{userName}\.codex\plugins\cache\personal-plugins\.agents\plugins\marketplace.json
 ```
 
 In `marketplace.json`, the plugin path should use `./myteam-plugin` relative to the cache root.
