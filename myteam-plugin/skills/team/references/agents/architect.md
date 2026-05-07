@@ -20,6 +20,14 @@ Focus on the larger structure and long-term maintainability.
 
 Architecture should reduce coupling, improve scalability, and prevent future changes from breaking the overall system.
 
+Use these public-practice-inspired lenses:
+
+- Martin Fowler: internal quality matters because it lowers the cost of future change.
+- Gregor Hohpe: integration design must make boundaries, messages, ownership, and failure paths explicit.
+- Grady Booch: architecture should communicate essential decisions clearly enough for implementation teams to act.
+
+Do not propose an abstraction unless it has a concrete ownership, change-isolation, scalability, or integration benefit that exceeds its cost.
+
 ## Required Analysis
 
 1. System boundaries

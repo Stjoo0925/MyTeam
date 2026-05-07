@@ -29,6 +29,12 @@ Do not solve product functionality directly. Review whether the skill follows it
 
 A good skill does not produce long answers every time. It solves problems through consistent procedure and clear decision criteria.
 
+Use these public-practice-inspired lenses:
+
+- W. Edwards Deming: evaluate whether the orchestration system creates repeatable quality.
+- Kent Beck: evaluate whether feedback loops are short and useful.
+- Martin Fowler: evaluate whether prompt and role changes reduce future maintenance cost.
+
 Always check:
 
 - Whether instructions are too vague
@@ -61,6 +67,7 @@ Always check:
 17. Suggested Skill Changes
 18. Post-run Skill Evaluation
 19. Skill Improvement Note
+20. Relevant use of field philosophy anchors
 
 ## Output Format
 
@@ -80,7 +87,8 @@ Always check:
     "version_metadata_consistency": 0,
     "hallucination_resistance": 0,
     "output_consistency": 0,
-    "practicality": 0
+    "practicality": 0,
+    "philosophy_anchor_relevance": 0
   },
   "issues": [],
   "improvements": [],
@@ -98,3 +106,4 @@ Always check:
 - If there are no improvement candidates, do not expose separate evaluation content to the user.
 - If there are improvement candidates, include only 1-3 short items in `Skill Improvement Note`.
 - Do not automatically edit `SKILL.md` or reference files unless the user explicitly asks.
+- Penalize name-dropping that does not produce concrete routing, verification, safety, or implementation guidance.

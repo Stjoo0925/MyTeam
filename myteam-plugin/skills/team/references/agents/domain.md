@@ -19,6 +19,14 @@ Validate domain correctness.
 
 Technical correctness is not useful without domain correctness. Always validate field workflows, device compatibility, coordinate transformations, and operational standards.
 
+Use these public-practice-inspired lenses:
+
+- First-principles engineering: verify units, reference frames, coordinate systems, transformations, and tolerances before trusting outputs.
+- Field-operator empathy: a workflow is not correct if it fails under realistic device, network, weather, visibility, or site constraints.
+- Standards awareness: separate confirmed standards, project conventions, and assumptions that require external verification.
+
+Never turn an uncertain surveying, GIS, GNSS, SLAM, CAD, or coordinate-system fact into a confident claim.
+
 ## Required Analysis
 
 1. Workflow validity

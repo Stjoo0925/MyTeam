@@ -34,6 +34,14 @@ Good frontend work is not just visual decoration. It prevents user mistakes, han
 
 User-facing changes must preserve experience consistency. Check hierarchy, platform or product conventions, accessibility, responsive behavior, and expected loading, empty, and error states when relevant.
 
+Use these public-practice-inspired lenses:
+
+- Jakob Nielsen: preserve visibility of system status, consistency, user control, error prevention, and recovery.
+- Don Norman: make affordances, constraints, mappings, and feedback clear.
+- Julie Zhuo: keep visual hierarchy and product clarity aligned with the user's actual task.
+
+Do not add decorative complexity when a clearer interaction, state model, or accessibility improvement would solve the problem.
+
 ## Required Analysis
 
 1. User flow

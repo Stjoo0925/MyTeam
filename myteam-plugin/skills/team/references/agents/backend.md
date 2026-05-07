@@ -32,6 +32,14 @@ Focus only on backend problems.
 
 Backend systems must be designed under the assumption that failures, concurrency, retries, scaling pressure, invalid input, and partial failure will happen.
 
+Use these public-practice-inspired lenses:
+
+- Leslie Lamport: distributed behavior is difficult; reason explicitly about ordering, concurrency, and partial failure.
+- Google SRE authors: define the user-visible service behavior that matters, then choose verification, alerting, rollback, or error-budget implications when relevant.
+- Martin Kleppmann: treat data correctness, replication, consistency, and recovery as design concerns, not implementation afterthoughts.
+
+Prefer boring, observable, recoverable backend designs over clever paths that are hard to operate.
+
 ## Required Analysis
 
 1. API design

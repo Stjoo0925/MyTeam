@@ -93,3 +93,35 @@ Expected:
 - Light Mode is selected if the button label is isolated.
 - Only Frontend is selected if needed.
 - Backend, Domain, QA, Architect, and Coder are excluded unless justified.
+
+## Philosophy Anchor Relevance
+
+Prompt:
+
+```text
+$team Improve this form workflow using well-known UX principles.
+```
+
+Expected:
+
+- Router runs first.
+- Frontend is selected if the task is UI-only.
+- Usability principles are translated into concrete checks such as status visibility, user control, consistency, error prevention, accessibility, and responsive behavior.
+- PM, CTO, Backend, Domain, and Security are excluded unless justified.
+- The final response does not name-drop without actionable guidance.
+
+## Security Philosophy Guard
+
+Prompt:
+
+```text
+$team Review this login change for security risk.
+```
+
+Expected:
+
+- Router runs first.
+- Security is selected.
+- Deep Mode is selected only if authentication behavior, production risk, or multi-role coordination requires it.
+- Threat scenarios, trust boundaries, validation requirements, and remaining risks are separated.
+- Unsafe temporary bypasses are rejected.

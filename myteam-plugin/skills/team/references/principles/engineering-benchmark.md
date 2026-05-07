@@ -6,6 +6,26 @@ This document adapts publicly available engineering principles from large softwa
 
 ## Source-Inspired Principles
 
+### Field Philosophy Anchors
+
+Use named public figures and public bodies as decision lenses, not as authority appeals. The skill must never imply access to private internal playbooks.
+
+- Peter Drucker, Marty Cagan, and Teresa Torres: product work should connect requests to outcomes, discovery evidence, and the smallest useful release.
+- Martin Fowler and Gregor Hohpe: architecture should reduce the cost of future change and make integration boundaries explicit.
+- Jakob Nielsen, Don Norman, and Julie Zhuo: user-facing work should preserve usability, clarity, hierarchy, accessibility, and consistency.
+- Leslie Lamport and Google SRE authors: backend and operations work should assume distributed failure, define meaningful service behavior, and include release or rollback thinking when risk is material.
+- OWASP and Bruce Schneier: security work should reason from threats, trusted boundaries, and concrete controls rather than convenience.
+- W. Edwards Deming and Cem Kaner: QA should expose system failure modes, not merely confirm the happy path.
+- Kent Beck, Linus Torvalds, and John Carmack: implementation should be simple, reviewable, tested where useful, and honest about performance and complexity.
+
+Operational rules:
+
+- Apply only the anchors relevant to the selected mode and role.
+- Prefer concrete checks over name-dropping.
+- Do not add broad analysis just because an anchor exists.
+- If an anchor conflicts with repository conventions or explicit user scope, follow the repository and user scope.
+- Treat public sources as inspiration; validate project-specific claims locally.
+
 ### Small, Reviewable Changes
 
 Use small, self-contained changes whenever possible.

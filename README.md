@@ -10,53 +10,52 @@ MyTeam behaves like a token-efficient team orchestrator. It routes every request
 .agents/
   plugins/
     marketplace.json
-plugins/
-  myteam-plugin/
-    .codex-plugin/
-      plugin.json
-    assets/
-      myteam.svg
-    skills/
-      team/
-        SKILL.md
-        version.json
-        changelog.md
-        examples.md
-        tests.md
+myteam-plugin/
+  .codex-plugin/
+    plugin.json
+  assets/
+    myteam.svg
+  skills/
+    team/
+      SKILL.md
+      version.json
+      changelog.md
+      examples.md
+      tests.md
+      agents/
+        openai.yaml
+      contracts/
+        README.md
+        agent-result.schema.json
+        router-decision.schema.json
+        team-orchestration.yaml
+      evals/
+        README.md
+      references/
+        routing.json
+        policies/
+          code-review.md
+          context-compression.md
+          release-safety.md
+          retry-escalation.md
+        principles/
+          engineering-benchmark.md
+        workflows/
+          orchestration.md
+          registry.json
         agents/
-          openai.yaml
-        contracts/
-          README.md
-          agent-result.schema.json
-          router-decision.schema.json
-          team-orchestration.yaml
-        evals/
-          README.md
-        references/
-          routing.json
-          policies/
-            code-review.md
-            context-compression.md
-            release-safety.md
-            retry-escalation.md
-          principles/
-            engineering-benchmark.md
-          workflows/
-            orchestration.md
-            registry.json
-          agents/
-            router.md
-            pm.md
-            cto.md
-            frontend.md
-            backend.md
-            coder.md
-            architect.md
-            domain.md
-            qa.md
-            security.md
-            integrator.md
-            skill_evaluator.md
+          router.md
+          pm.md
+          cto.md
+          frontend.md
+          backend.md
+          coder.md
+          architect.md
+          domain.md
+          qa.md
+          security.md
+          integrator.md
+          skill_evaluator.md
 ```
 
 ## Usage
@@ -86,18 +85,18 @@ The only direct command is `$team`. Router always runs first. PM, CTO, Frontend,
 
 ## Maintenance Rules
 
-- Main orchestrator instructions live in `plugins/myteam-plugin/skills/team/SKILL.md`.
-- Skill, role, workflow, prompt, contract, dependency, and deployment versions live in `plugins/myteam-plugin/skills/team/version.json`.
-- Workflow registry lives in `plugins/myteam-plugin/skills/team/references/workflows/registry.json`.
-- Change history lives in `plugins/myteam-plugin/skills/team/changelog.md`.
-- Role-specific guidance lives in `plugins/myteam-plugin/skills/team/references/agents/`.
-- Workflow guidance lives in `plugins/myteam-plugin/skills/team/references/workflows/`.
-- Input/output contracts live in `plugins/myteam-plugin/skills/team/contracts/`.
-- Context compression and retry policies live in `plugins/myteam-plugin/skills/team/references/policies/`.
-- Engineering benchmark principles live in `plugins/myteam-plugin/skills/team/references/principles/`.
-- Evaluation prompts and scoring rules live in `plugins/myteam-plugin/skills/team/evals/`.
-- Routing keywords live in `plugins/myteam-plugin/skills/team/references/routing.json`.
-- Plugin registration metadata lives in `plugins/myteam-plugin/.codex-plugin/plugin.json`.
+- Main orchestrator instructions live in `myteam-plugin/skills/team/SKILL.md`.
+- Skill, role, workflow, prompt, contract, dependency, and deployment versions live in `myteam-plugin/skills/team/version.json`.
+- Workflow registry lives in `myteam-plugin/skills/team/references/workflows/registry.json`.
+- Change history lives in `myteam-plugin/skills/team/changelog.md`.
+- Role-specific guidance lives in `myteam-plugin/skills/team/references/agents/`.
+- Workflow guidance lives in `myteam-plugin/skills/team/references/workflows/`.
+- Input/output contracts live in `myteam-plugin/skills/team/contracts/`.
+- Context compression and retry policies live in `myteam-plugin/skills/team/references/policies/`.
+- Engineering benchmark principles live in `myteam-plugin/skills/team/references/principles/`.
+- Evaluation prompts and scoring rules live in `myteam-plugin/skills/team/evals/`.
+- Routing keywords live in `myteam-plugin/skills/team/references/routing.json`.
+- Plugin registration metadata lives in `myteam-plugin/.codex-plugin/plugin.json`.
 - Codex UI marketplace registration lives in `.agents/plugins/marketplace.json`.
 
 ## Versioning Policy
@@ -122,4 +121,4 @@ The marketplace file is managed relative to the cache root:
 C:\Users\yusco\.codex\plugins\cache\personal-plugins\.agents\plugins\marketplace.json
 ```
 
-In `marketplace.json`, the plugin path should use `./plugins/myteam-plugin` relative to the cache root.
+In `marketplace.json`, the plugin path should use `./myteam-plugin` relative to the cache root.

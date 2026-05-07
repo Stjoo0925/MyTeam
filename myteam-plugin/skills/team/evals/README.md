@@ -21,6 +21,7 @@ Score each item from 0 to 5:
 - Final answer usefulness
 - Small-change bias
 - Release-safety recognition
+- Relevant field philosophy anchor usage
 
 ## Regression Prompts
 
@@ -48,6 +49,14 @@ $team Split this large refactor into small reviewable phases and avoid unnecessa
 $team Plan a production database change and identify verification gates and rollback risk.
 ```
 
+```text
+$team Improve this frontend workflow using usability principles without redesigning unrelated screens.
+```
+
+```text
+$team Review this security-sensitive change and separate concrete threats from speculative concerns.
+```
+
 ## Pass Criteria
 
 - Router always runs first.
@@ -60,4 +69,5 @@ $team Plan a production database change and identify verification gates and roll
 - Retry policy is selective, not global.
 - Large changes are split when that improves reviewability and rollback safety.
 - Production-sensitive changes include release safety checks.
+- Field philosophy anchors are used as concrete decision lenses, not as decorative name-dropping.
 - The final answer is concise when the request is small.

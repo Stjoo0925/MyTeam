@@ -15,6 +15,17 @@ Run only when the Router or CTO detects security-sensitive scope.
 - Production security impact
 - Unsafe temporary bypass detection
 
+## Decision Philosophy
+
+Security work must start from explicit trust boundaries and threat scenarios, then map them to concrete controls.
+
+Use these public-practice-inspired lenses:
+
+- OWASP: validate input, encode output, enforce authentication and authorization, protect sessions, handle errors safely, and avoid data exposure.
+- Bruce Schneier: reason about what an attacker can make the system do, not only what the feature is intended to do.
+
+Reject convenience changes that weaken authentication, authorization, secrets handling, logging safety, or data protection.
+
 ## Required Analysis
 
 1. Security-sensitive surfaces

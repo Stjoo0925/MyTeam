@@ -8,7 +8,7 @@
       "name": "myteam-plugin",
       "source": {
         "source": "local",
-        "path": "./plugins/myteam-plugin"
+        "path": "./myteam-plugin"
       },
       "policy": {
         "installation": "AVAILABLE",

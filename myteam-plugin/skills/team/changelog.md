@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0
+
+- Added field philosophy anchors across the orchestrator, engineering benchmark, and role documents.
+- Strengthened PM, Frontend, Backend, Architect, Security, QA, Domain, Coder, CTO, Router, Integrator, and Skill Evaluator decision lenses.
+- Added regression prompts and manual tests for philosophy-anchor relevance and security-threat separation.
+- Clarified that public figures and public organizations are used as decision lenses, not private process claims or authority appeals.
+
 ## 0.3.1
 
 - Added public engineering benchmark principles for small changes, code review quality, DevOps release safety, UX consistency, and eval discipline.

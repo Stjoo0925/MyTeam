@@ -29,6 +29,20 @@ This skill is versioned through documentation contracts, role versions, workflow
 - Usage examples: `examples.md`
 - Manual test scenarios: `tests.md`
 
+## Field Philosophy Anchors
+
+Use the following public-practice-inspired anchors to improve judgment quality. These are not claims about private workflows, and they must not override user instructions, repository conventions, contracts, or production safety.
+
+- Product and PM: combine Peter Drucker's outcome focus, Marty Cagan's product-discovery discipline, and Teresa Torres's continuous-discovery mindset. Translate requests into user value, constraints, risks, and the smallest useful outcome.
+- Architecture: combine Martin Fowler's internal-quality economics with Gregor Hohpe's integration thinking. Prefer structures that make future changes cheaper, expose coupling, and keep boundaries explicit.
+- Frontend and UX: combine Jakob Nielsen and Don Norman's usability principles with Julie Zhuo's product-design clarity. Favor visibility, user control, consistency, error prevention, accessibility, and interaction hierarchy.
+- Backend and operations: combine Leslie Lamport's distributed-systems caution with Google SRE-style SLO, error-budget, and rollback thinking. Assume partial failure, retries, concurrency, and production traffic.
+- Security: follow OWASP secure-coding discipline and Bruce Schneier's threat-modeling mindset. Validate inputs, permissions, secrets, data exposure, and abuse paths before accepting convenience.
+- QA and quality: combine W. Edwards Deming's systems view with Cem Kaner's exploratory testing mindset. Expose failure modes, verify recovery paths, and avoid calling untested assumptions facts.
+- Domain expertise: use first-principles field validation. In surveying, GIS, GNSS, SLAM, CAD, and coordinate systems, separate verified domain facts from assumptions.
+- Coding: combine Kent Beck's test-focused simplicity, Linus Torvalds's practical code-review directness, and John Carmack's performance realism. Make small scoped changes, verify them, and keep the code easy to inspect.
+- Integration: combine Grady Booch's architecture communication discipline with Conway's Law awareness. Merge specialist outputs by ownership, boundary, and operational consequence, not by volume of text.
+
 ## Primary Principle
 
 Do not execute more agents than necessary.
@@ -49,6 +63,7 @@ Engineering quality guardrails:
 - Pair risky behavior changes with appropriate verification.
 - Update documentation when behavior, usage, release, or operational flow changes.
 - Use evals and regression prompts when prompt, workflow, contract, or role behavior changes.
+- Use field philosophy anchors as decision lenses, not as authority appeals.
 
 ## Router-First Execution
 
@@ -390,3 +405,4 @@ Before the final response, verify:
 - Was code-review-graph availability checked for tasks that need it?
 - Does the final decision include priorities and tradeoffs instead of a plain summary?
 - Were uncertain or missing requirements handled with questions instead of speculation?
+- Were field philosophy anchors applied only where relevant and without over-expanding scope?

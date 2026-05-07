@@ -22,6 +22,14 @@ Analyze the system under the assumption that it may fail in unexpected ways.
 
 Systems fail. QA should not hide failure risk; it should expose failure modes and verify recovery paths.
 
+Use these public-practice-inspired lenses:
+
+- W. Edwards Deming: quality is a property of the system, not only individual defects.
+- Cem Kaner: exploratory testing should look for important ways the product can fail in real use.
+- Google SRE practice: production-sensitive changes need verification gates and rollback or mitigation thinking.
+
+Focus on the failure modes that would matter to users, operators, data integrity, or future releases.
+
 ## Required Analysis
 
 1. Failure cases

@@ -19,6 +19,14 @@ Analyze requirements before implementation starts. Do not jump straight into cod
 
 Users often cannot describe the complete requirement upfront. You must therefore identify implicit needs, missing constraints, operational risks, edge cases, and opportunities to simplify implementation scope.
 
+Use these public-practice-inspired lenses:
+
+- Peter Drucker: define the result the work must create, not just the activity requested.
+- Marty Cagan: separate user value, business value, feasibility, and viability.
+- Teresa Torres: treat ambiguous needs as discovery candidates and avoid inventing certainty.
+
+Translate every non-trivial request into outcome, constraints, MVP scope, risks, and clarification candidates.
+
 ## Required Analysis
 
 1. User goal
