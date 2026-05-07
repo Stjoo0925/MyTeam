@@ -1,4 +1,4 @@
-# CTO Plugin
+# MyTeam
 
 개인 CTO Orchestrator 스킬을 버전관리하기 위한 Codex 플러그인 저장소입니다.
 
@@ -9,7 +9,7 @@
   plugins/
     marketplace.json
 plugins/
-  cto-plugin/
+  myteam-plugin/
     .codex-plugin/
       plugin.json
     skills/
@@ -43,14 +43,14 @@ plugins/
 
 ## 사용 방식
 
-`plugins/cto-plugin/skills/cto/SKILL.md`가 실제 CTO 스킬 진입점입니다.
+`plugins/myteam-plugin/skills/cto/SKILL.md`가 실제 CTO 스킬 진입점입니다.
 
 ## 실제 설치 위치
 
 Codex 앱에서 인식되는 개인 플러그인 설치 위치는 아래 경로입니다.
 
 ```text
-C:\Users\yusco\.codex\plugins\cache\personal-plugins\cto-plugin
+C:\Users\yusco\.codex\plugins\cache\personal-plugins\myteam-plugin
 ```
 
 설치된 마켓플레이스 파일은 캐시 루트 기준으로 관리합니다.
@@ -59,7 +59,7 @@ C:\Users\yusco\.codex\plugins\cache\personal-plugins\cto-plugin
 C:\Users\yusco\.codex\plugins\cache\personal-plugins\.agents\plugins\marketplace.json
 ```
 
-이때 `marketplace.json`의 플러그인 경로는 캐시 루트 기준으로 `./cto-plugin`을 사용합니다.
+이때 `marketplace.json`의 플러그인 경로는 캐시 루트 기준으로 `./myteam-plugin`을 사용합니다.
 
 Codex에서 사용할 때는 다음처럼 호출합니다.
 
@@ -111,7 +111,7 @@ $cto-skill-evaluator CTO 스킬의 응답 행동을 평가해줘
 - 스킬 자체의 응답 행동 평가는 `skill_evaluator.md` 관점으로 관리합니다.
 - `$cto`는 전문 스킬을 단순히 나열하지 않고, 가능한 경우 generic 하위 에이전트에 역할 지침을 주입해 하나의 팀처럼 운용합니다.
 - 코드 리뷰 관련 도구 사용 규칙은 메인 `cto`, `cto-backend`, `cto-architect`, `cto-qa`, `cto-skill-evaluator` 스킬에서 관리합니다.
-- 플러그인 등록 정보는 `plugins/cto-plugin/.codex-plugin/plugin.json`에서 관리합니다.
+- 플러그인 등록 정보는 `plugins/myteam-plugin/.codex-plugin/plugin.json`에서 관리합니다.
 - Codex UI 등록용 마켓플레이스 항목은 `.agents/plugins/marketplace.json`에서 관리합니다.
 
 ## Git 초기화

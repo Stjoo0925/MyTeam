@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="CTO Plugin">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="MyTeam">
   <rect width="256" height="256" rx="56" fill="#2563EB"/>
   <path d="M64 84h128v28H64V84Zm0 48h80v28H64v-28Zm0 48h128v28H64v-28Z" fill="#FFFFFF"/>
   <circle cx="184" cy="146" r="24" fill="#93C5FD"/>

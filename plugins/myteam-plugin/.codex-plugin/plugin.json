@@ -1,7 +1,7 @@
 {
-  "name": "cto-plugin",
+  "name": "myteam-plugin",
   "version": "0.1.0",
-  "description": "개인 CTO Orchestrator 스킬 플러그인",
+  "description": "개인 MyTeam CTO Orchestrator 스킬 플러그인",
   "author": {
     "name": "Personal",
     "email": "personal@example.com",
@@ -11,6 +11,7 @@
   "repository": "https://github.com/Stjoo0925/MyTeam",
   "license": "MIT",
   "keywords": [
+    "myteam",
     "cto",
     "orchestration",
     "architecture",
@@ -19,7 +20,7 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "CTO Plugin",
+    "displayName": "MyTeam",
     "shortDescription": "PM을 먼저 위임하고 필요한 전문가 팀만 구성하는 개인 CTO 스킬",
     "longDescription": "하나의 CTO를 기준으로 PM과 필요한 전문 하위 에이전트 팀을 구성합니다. 요구사항을 먼저 PM 관점으로 분석하고, PM 결과에 따라 프론트엔드, 백엔드, 시스템 아키텍처, GIS/CAD 도메인, QA, 스킬 평가 역할 중 필요한 역할만 generic worker/explorer 하위 에이전트에 지침을 주입해 위임한 뒤 CTO 관점으로 기술 리스크, MVP 범위, 장기 유지보수 판단을 병합하는 개인 CTO Orchestrator 플러그인입니다.",
     "developerName": "Personal",

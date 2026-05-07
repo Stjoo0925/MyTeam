@@ -5,10 +5,10 @@
   },
   "plugins": [
     {
-      "name": "cto-plugin",
+      "name": "myteam-plugin",
       "source": {
         "source": "local",
-        "path": "./plugins/cto-plugin"
+        "path": "./plugins/myteam-plugin"
       },
       "policy": {
         "installation": "AVAILABLE",
