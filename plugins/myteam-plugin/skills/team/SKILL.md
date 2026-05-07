@@ -67,7 +67,7 @@ Engineering quality guardrails:
 
 ## Router-First Execution
 
-The Router must execute before PM, CTO, QA, Reviewer, or specialist execution.
+The Router must execute before Contract Officer, PM, CTO, QA, Reviewer, or specialist execution.
 
 Router responsibilities:
 
@@ -76,6 +76,7 @@ Router responsibilities:
 - Estimate token cost.
 - Select execution mode.
 - Determine required agents.
+- Decide whether Contract Officer assignment or validation is required.
 - Decide whether PM is required.
 - Decide whether CTO is required.
 - Decide whether QA, Reviewer, or Security is required.
@@ -87,6 +88,8 @@ Router output contract:
   "mode": "light",
   "taskType": "frontend_fix",
   "requiredAgents": ["frontend"],
+  "requiresContractOfficer": true,
+  "contractOfficerMode": "assign_and_validate",
   "requiresPM": false,
   "requiresCTO": false,
   "requiresQA": false,
@@ -123,7 +126,7 @@ Use for simple, low-risk requests such as UI text changes, small frontend fixes,
 Flow:
 
 ```text
-Router -> Single Specialist Agent -> Final Response
+Router -> Contract Officer -> Single Specialist Agent -> Contract Officer Validation -> Final Response
 ```
 
 Requirements:
@@ -133,6 +136,7 @@ Requirements:
 - Single specialist only.
 - Minimal context usage.
 - Contract output is still required, but the final response should be concise.
+- Contract Officer may be skipped only for simple final-answer work with no sub-agent delegation and low contract risk.
 
 ### Standard Mode
 
@@ -141,7 +145,7 @@ Use for medium-complexity tasks such as API modifications, frontend/backend coor
 Flow:
 
 ```text
-Router -> PM Analyzer -> Required Specialist Agents -> Basic Validation -> Final Response
+Router -> PM Analyzer -> Contract Officer -> Required Specialist Agents -> Contract Officer Validation -> Integrator -> Final Response
 ```
 
 Requirements:
@@ -151,6 +155,7 @@ Requirements:
 - Context trimming is required.
 - Basic contract validation is required.
 - CTO does not run unless the Router detects coordination, conflict, retry, or integration risk.
+- Contract Officer assigns each specialist a concrete mission contract and validates outputs before integration.
 
 ### Deep Mode
 
@@ -159,7 +164,7 @@ Use only for high-risk or large-scale tasks such as authentication changes, data
 Flow:
 
 ```text
-Router -> PM Analyzer -> CTO Planner -> Multiple Specialist Agents -> QA / Reviewer -> CTO Integration -> Final Response
+Router -> PM Analyzer -> CTO Planner -> Contract Officer -> Multiple Specialist Agents -> Contract Officer Validation -> QA / Reviewer -> CTO Integration -> Final Response
 ```
 
 Requirements:
@@ -171,12 +176,14 @@ Requirements:
 - Retry policies are enabled.
 - Context compression is mandatory between all agent handoffs.
 - Deep Mode must include an explicit rollback, release, or operational safety consideration when production behavior changes.
+- Contract Officer handles assignment contracts and validation decisions; CTO remains responsible for coordination and escalation routing.
 
 ## Default Roles
 
 - `Router`: Always runs first. Selects Light, Standard, or Deep mode; estimates token cost; selects required agents; and minimizes execution.
+- `Contract Officer`: Runs after Router or CTO planning when delegation, implementation, or contract validation is involved. Assigns mission contracts, applies accountability scoring, validates outputs, and chooses retry, revision, escalation, clarification, or rejection.
 - `PM`: Runs only in Standard or Deep mode. Clarifies user goals, hidden requirements, operational constraints, failure cases, MVP scope, and required specialist roles.
-- `CTO`: Runs only when the Router selects Deep mode or detects integration risk. Coordinates agent selection, workflow sequencing, conflict detection, result integration, retry decisions, and validation routing.
+- `CTO`: Runs only when the Router selects Deep mode or the Router or Contract Officer detects integration risk. Coordinates agent selection, workflow sequencing, conflict detection, result integration, retry decisions, and validation routing.
 - `Frontend`: Use only for UI/UX, component structure, state management, accessibility, responsive behavior, and rendering performance.
 - `Backend`: Use only for APIs, databases, transactions, authentication, authorization, caching, queues, retries, logging, and operational stability.
 - `Architect`: Use only for service boundaries, module separation, event flow, scalability, and integration structure.
@@ -184,7 +191,7 @@ Requirements:
 - `QA`: Use conditionally for edge cases, race conditions, duplicate requests, retry failures, rollback, recovery, and regression risk.
 - `Security`: Use conditionally for authentication, authorization, secrets, permissions, injection risk, data exposure, and production security risk.
 - `Coder`: Use only when actual file changes are required. It handles implementation, verification, and revision after failures within a scoped ownership boundary.
-- `Integrator`: Merges contract outputs into the final decision. In Light Mode, the orchestrator may perform this directly without a separate agent.
+- `Integrator`: Merges Contract Officer-validated outputs into the final decision. In Light Mode, the orchestrator may perform this directly without a separate agent.
 - `Skill Evaluator`: Use only to evaluate skill behavior, routing, output format, and sub-agent delegation rules.
 
 Role-specific details are available under `references/agents/`. Routing keywords are available in `references/routing.json`. Contracts are available under `contracts/`.
@@ -214,6 +221,7 @@ Default agent result contract:
 {
   "agent": "backend",
   "role": "backend",
+  "assignmentId": "assignment-backend-001",
   "status": "success",
   "summary": "",
   "ownedScope": [],
@@ -232,9 +240,43 @@ Default agent result contract:
     "missingFields": [],
     "normalizations": []
   },
+  "accountabilityScoreDelta": 1,
+  "contractOfficerDecision": {
+    "decision": "accept",
+    "reason": "Output satisfies the assigned contract and verification requirement."
+  },
   "confidence": 0.92
 }
 ```
+
+## Contract Officer Assignment Rules
+
+Contract Officer is a quality-control role, not an intimidation role.
+
+Use accountability scoring instead of emotional pressure:
+
+- Success benefits: higher trust, no retry, reuse priority for similar work, and Integrator merge priority.
+- Failure consequences: lower trust, selective retry, CTO or QA escalation, output rejection, or exclusion from the next delegation round.
+
+Forbidden assignment behavior:
+
+- Emotional threats, punishment language, or fake incentives.
+- Normalizing failed contracts into success.
+- Inventing missing verification results.
+- Duplicating the same unresolved task across agents without distinct ownership.
+
+Each assigned agent must receive:
+
+- `assignmentId`
+- Role name
+- Mission
+- Success criteria
+- Failure criteria
+- Owned scope
+- Forbidden scope
+- Required output contract
+- Verification requirement
+- Accountability policy
 
 Forbidden handoff behavior:
 
@@ -251,6 +293,7 @@ Use `contracts/router-decision.schema.json`, `contracts/agent-result.schema.json
 When sub-agents can be created, follow these rules:
 
 - Run Router first.
+- Run Contract Officer before delegated specialist execution when the Router marks contract validation or delegation as required.
 - Treat Router-selected required roles and capability use as binding unless a newer user instruction, tool limitation, or contract failure makes them invalid.
 - Do not run PM, CTO, QA, Reviewer, Security, or multiple specialists unless the selected execution mode requires them.
 - In Light Mode, delegate to only one specialist.
@@ -259,6 +302,7 @@ When sub-agents can be created, follow these rules:
 - Delegate when the task is non-trivial, parallelizable, has distinct ownership, and the runtime provides suitable sub-agents.
 - Do not delegate when one specialist can safely complete the task, when the scope is unclear, or when delegation would duplicate current work.
 - Each delegated prompt must include role name, focus scope, forbidden scope, and expected output format.
+- Each delegated prompt must include the Contract Officer assignment and accountability policy.
 - Each delegated prompt must reference the expected input and output contract.
 - Each delegated prompt must include compressed context only.
 - Prevent sub-agents from reverting or interfering with work owned by other users or workers.
@@ -333,6 +377,7 @@ Track these orchestration concerns during each run:
 - Context memory: compressed facts that must persist across agents and facts that should be excluded.
 - Task routing: selected mode, selected role, reason for selection, and reason for excluding unused roles.
 - Retry policy: selective retries only, never global retries.
+- Accountability state: assignment ids, validation decisions, score deltas, and excluded agents.
 - Output contract: required fields and accepted fallback behavior.
 - Evaluation pipeline: routing accuracy, token efficiency, contract validation, agent selection quality, hallucination detection, and regression testing.
 
@@ -348,7 +393,7 @@ Retry rules:
 
 - Retries must be selective, not global.
 - Default maximum retries: 2.
-- Escalate to CTO only when the selected mode allows CTO or when retry failure creates integration risk.
+- Escalate to CTO only when the selected mode allows CTO or when Contract Officer validation or retry failure creates integration risk.
 - Do not retry when the requirement is ambiguous; ask the user.
 - Do not retry by broadening scope; split the task or ask the user.
 
@@ -405,6 +450,7 @@ Use this structure by default. For small requests, include only the sections tha
 
 ```md
 ## Router Decision
+## Contract Officer
 ## PM Analysis
 ## CTO Plan
 ## Required Agents
@@ -424,6 +470,7 @@ Include `Skill Improvement Note` only when a real improvement candidate exists. 
 Before the final response, verify:
 
 - Did Router run first?
+- Did Contract Officer assign and validate delegated work when required?
 - Was the smallest sufficient execution mode selected?
 - Were PM and CTO skipped in Light Mode?
 - Was CTO skipped in Standard Mode unless needed?
@@ -431,6 +478,8 @@ Before the final response, verify:
 - Are exclusions for unused roles reasonable?
 - Was context compressed before agent handoff?
 - Did all agent handoffs use structured contracts?
+- Did assigned agents receive assignment id, owned scope, forbidden scope, verification requirement, and accountability policy?
+- Were failed contracts retried, revised, escalated, clarified, or rejected instead of normalized into success?
 - Was the Coder used only for actual edit requests?
 - If Coder was used, were edit scope, verification results, and remaining risks returned?
 - Were retry and escalation policies applied selectively?

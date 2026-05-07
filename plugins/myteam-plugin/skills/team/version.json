@@ -1,16 +1,17 @@
 {
   "name": "team",
-  "version": "0.4.1",
-  "promptVersion": "3.2.0",
-  "workflowVersion": "3.0.0",
-  "contractVersion": "2.1.0",
+  "version": "0.5.0",
+  "promptVersion": "3.3.0",
+  "workflowVersion": "3.1.0",
+  "contractVersion": "2.2.0",
   "deployment": {
-    "dev": "0.4.1",
+    "dev": "0.5.0",
     "staging": null,
     "prod": "0.1.0"
   },
   "roles": {
     "router": "1.1.0",
+    "contract_officer": "1.0.0",
     "pm": "1.3.0",
     "cto": "2.1.0",
     "frontend": "1.1.0",

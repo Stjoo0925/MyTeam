@@ -1,4 +1,4 @@
 interface:
   display_name: "MyTeam"
-  short_description: "Routes first, minimizes agents, and uses contract-based Light, Standard, or Deep execution."
-  default_prompt: "$team Route this request, choose Light, Standard, or Deep mode, execute only required agents, and provide the final team decision."
+  short_description: "Routes first, minimizes agents, and uses Contract Officer validation across Light, Standard, or Deep execution."
+  default_prompt: "$team Route this request, choose Light, Standard, or Deep mode, use Contract Officer assignment and validation when needed, execute only required agents, and provide the final team decision."

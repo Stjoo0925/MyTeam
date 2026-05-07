@@ -6,7 +6,7 @@ Use these contracts for all inter-agent handoffs.
 
 - `router-decision.schema.json`: Router execution mode and agent selection result.
 - `agent-result.schema.json`: Specialist, QA, Security, Coder, and Integrator result handoff.
-- `team-orchestration.yaml`: End-to-end orchestration contract.
+- `team-orchestration.yaml`: End-to-end orchestration, Contract Officer assignment, accountability, validation, and final output contract.
 
 Contract rules:
 
@@ -17,7 +17,9 @@ Contract rules:
 - Agents must not exchange raw conversational outputs.
 - Full chat history transfer is forbidden.
 - Router decisions must include execution strength, delegation eligibility, skipped agents, and overuse guard details.
+- Router decisions must state whether Contract Officer assignment or validation is required.
 - Strong execution means required capabilities must be used decisively, but every extra agent must have a distinct reason and ownership boundary.
 - Sub-agent delegation is required only when the task is non-trivial, parallelizable, and the runtime provides suitable explorer or worker agents.
 - Sub-agent delegation is forbidden when it duplicates work, expands scope, or replaces a simple single-agent path.
-- Agent results must include owned scope, forbidden scope, verification status, and contract compliance status.
+- Agent results must include assignment id, owned scope, forbidden scope, verification status, contract compliance status, accountability score delta, and Contract Officer decision.
+- Accountability scoring is an internal routing signal. Emotional threats, punishment language, and false rewards are forbidden.

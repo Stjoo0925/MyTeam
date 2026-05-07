@@ -29,6 +29,9 @@
                 "maximum": 1
               }
             }
+          },
+          "contractOfficerMode": {
+            "enum": ["none", "assign_only", "validate_only", "assign_and_validate"]
           }
         }
       }
@@ -137,12 +140,46 @@
           }
         }
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "requiresContractOfficer": {
+            "const": false
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "contractOfficerMode": {
+            "const": "none"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "requiresContractOfficer": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "contractOfficerMode": {
+            "enum": ["assign_only", "validate_only", "assign_and_validate"]
+          }
+        }
+      }
     }
   ],
   "required": [
     "mode",
     "taskType",
     "requiredAgents",
+    "requiresContractOfficer",
+    "contractOfficerMode",
     "requiresPM",
     "requiresCTO",
     "requiresQA",
@@ -168,6 +205,7 @@
         "type": "string",
         "enum": [
           "router",
+          "contract_officer",
           "pm",
           "cto",
           "frontend",
@@ -186,6 +224,14 @@
     },
     "requiresPM": {
       "type": "boolean"
+    },
+    "requiresContractOfficer": {
+      "type": "boolean"
+    },
+    "contractOfficerMode": {
+      "type": "string",
+      "enum": ["none", "assign_only", "validate_only", "assign_and_validate"],
+      "description": "How Contract Officer participates in this workflow. Use none only for simple final-answer work with no delegation and low contract risk."
     },
     "requiresCTO": {
       "type": "boolean"
@@ -256,6 +302,7 @@
             "type": "string",
             "enum": [
               "pm",
+              "contract_officer",
               "cto",
               "frontend",
               "backend",

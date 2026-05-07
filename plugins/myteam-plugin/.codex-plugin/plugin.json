@@ -1,6 +1,6 @@
 {
   "name": "myteam-plugin",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Token-efficient MyTeam Orchestrator skill plugin",
   "author": {
     "name": "Personal",
@@ -22,7 +22,7 @@
   "interface": {
     "displayName": "MyTeam",
     "shortDescription": "Routes first, minimizes agents, and uses contract-based Light, Standard, or Deep execution.",
-    "longDescription": "Acts as a token-efficient team orchestrator. It runs a lightweight Router first, selects Light, Standard, or Deep mode, executes only required roles among PM, CTO, Frontend, Backend, Architect, Domain, QA, Security, Coder, Integrator, and Skill Evaluator, compresses context before handoff, validates structured contracts, applies selective retry policy, and produces a concise final decision.",
+    "longDescription": "Acts as a token-efficient team orchestrator. It runs a lightweight Router first, selects Light, Standard, or Deep mode, uses a Contract Officer to assign and validate delegated work when needed, executes only required roles among PM, CTO, Frontend, Backend, Architect, Domain, QA, Security, Coder, Integrator, and Skill Evaluator, compresses context before handoff, validates structured contracts, applies selective retry policy, and produces a concise final decision.",
     "developerName": "Personal",
     "category": "Productivity",
     "capabilities": [

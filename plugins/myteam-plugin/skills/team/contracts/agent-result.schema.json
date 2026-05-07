@@ -46,11 +46,36 @@
           }
         }
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "contractOfficerDecision": {
+            "properties": {
+              "decision": {
+                "const": "accept"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "contractCompliance": {
+            "properties": {
+              "valid": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
     }
   ],
   "required": [
     "agent",
     "role",
+    "assignmentId",
     "status",
     "summary",
     "ownedScope",
@@ -60,6 +85,8 @@
     "requiresOtherAgents",
     "verification",
     "contractCompliance",
+    "accountabilityScoreDelta",
+    "contractOfficerDecision",
     "confidence"
   ],
   "properties": {
@@ -71,6 +98,7 @@
       "type": "string",
       "enum": [
         "pm",
+        "contract_officer",
         "cto",
         "frontend",
         "backend",
@@ -82,6 +110,10 @@
         "integrator",
         "skill_evaluator"
       ]
+    },
+    "assignmentId": {
+      "type": "string",
+      "minLength": 1
     },
     "status": {
       "type": "string",
@@ -122,6 +154,7 @@
         "type": "string",
         "enum": [
           "pm",
+          "contract_officer",
           "cto",
           "frontend",
           "backend",
@@ -183,6 +216,34 @@
             "type": "string",
             "minLength": 1
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "accountabilityScoreDelta": {
+      "type": "integer",
+      "minimum": -2,
+      "maximum": 2,
+      "description": "Internal routing signal assigned by Contract Officer. Positive values represent contract-quality confidence; negative values represent failed or weak contract performance."
+    },
+    "contractOfficerDecision": {
+      "type": "object",
+      "required": ["decision", "reason"],
+      "properties": {
+        "decision": {
+          "type": "string",
+          "enum": [
+            "accept",
+            "retry",
+            "revise",
+            "escalate_to_cto",
+            "ask_user",
+            "reject_output"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
         }
       },
       "additionalProperties": false

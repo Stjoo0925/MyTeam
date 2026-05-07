@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0
+
+- Added Contract Officer as a formal orchestration role between Router or CTO planning and delegated specialist execution.
+- Added mission assignment, accountability scoring, and validation decision contracts for delegated agent work.
+- Updated Light, Standard, and Deep workflows so delegated outputs are assigned and validated before integration.
+- Forbid emotional threats, punishment language, and false rewards in favor of contract clarity and internal accountability signals.
+
 ## 0.4.1
 
 - Strengthened orchestration contracts with explicit execution strength, delegation eligibility, overuse guard, skipped-agent reasons, owned scope, verification, and contract compliance fields.

@@ -1,12 +1,13 @@
 {
-  "orchestrationVersion": "3.0.0",
+  "orchestrationVersion": "3.1.0",
   "workflows": {
-    "light": "1.0.0",
-    "standard": "1.0.0",
-    "deep": "2.0.0"
+    "light": "1.1.0",
+    "standard": "1.1.0",
+    "deep": "2.1.0"
   },
   "agents": {
     "router": "1.0.0",
+    "contract_officer": "1.0.0",
     "pm": "1.2.0",
     "cto": "2.0.0",
     "frontend": "1.0.0",
@@ -20,9 +21,9 @@
     "skill_evaluator": "1.2.0"
   },
   "contracts": {
-    "routerDecision": "2.0.0",
-    "agentResult": "1.0.0",
-    "teamOrchestration": "2.0.0"
+    "routerDecision": "2.2.0",
+    "agentResult": "2.2.0",
+    "teamOrchestration": "2.2.0"
   },
   "policies": {
     "contextCompression": "1.0.0",

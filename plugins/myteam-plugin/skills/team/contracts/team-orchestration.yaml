@@ -1,6 +1,6 @@
 name: team-orchestration
-version: 2.1.0
-description: Strong contract for MyTeam Router, optional PM, conditional CTO, specialist, validation, delegation, integration, and final response flow.
+version: 2.2.0
+description: Strong contract for MyTeam Router, Contract Officer, optional PM, conditional CTO, specialist, validation, delegation, integration, and final response flow.
 
 input:
   requirement_spec:
@@ -41,6 +41,17 @@ router_decision:
   requiredAgents:
     type: array
     items: string
+    required: true
+  requiresContractOfficer:
+    type: boolean
+    required: true
+  contractOfficerMode:
+    type: enum
+    values:
+      - none
+      - assign_only
+      - validate_only
+      - assign_and_validate
     required: true
   requiresPM:
     type: boolean
@@ -114,14 +125,86 @@ router_decision:
         type: string
         required: true
 
+contract_officer_assignment:
+  assignmentId:
+    type: string
+    required: true
+  assignedRole:
+    type: string
+    required: true
+  mission:
+    type: string
+    required: true
+  successCriteria:
+    type: array
+    items: string
+    required: true
+  failureCriteria:
+    type: array
+    items: string
+    required: true
+  ownedScope:
+    type: array
+    items: string
+    required: true
+  forbiddenScope:
+    type: array
+    items: string
+    required: true
+  requiredOutputContract:
+    type: string
+    required: true
+  verificationRequirement:
+    type: array
+    items: string
+    required: true
+  accountabilityPolicy:
+    type: object
+    required: true
+    fields:
+      successBenefits:
+        type: array
+        items: string
+        required: true
+      failureConsequences:
+        type: array
+        items: string
+        required: true
+      scoreRange:
+        type: array
+        items: number
+        required: true
+      emotionalPressureForbidden:
+        type: boolean
+        required: true
+
+accountability_policy:
+  success_benefits:
+    type: array
+    items: string
+    required: true
+  failure_consequences:
+    type: array
+    items: string
+    required: true
+  forbidden:
+    - Emotional threats.
+    - Punishment language.
+    - False rewards or fake incentives.
+    - Claims that the model will be personally harmed or rewarded.
+
 agent_result:
   agent:
+    type: string
+    required: true
+  assignmentId:
     type: string
     required: true
   role:
     type: enum
     values:
       - pm
+      - contract_officer
       - cto
       - frontend
       - backend
@@ -202,10 +285,81 @@ agent_result:
         type: array
         items: string
         required: true
+  accountabilityScoreDelta:
+    type: number
+    minimum: -2
+    maximum: 2
+    required: true
+  contractOfficerDecision:
+    type: object
+    required: true
+    fields:
+      decision:
+        type: enum
+        values:
+          - accept
+          - retry
+          - revise
+          - escalate_to_cto
+          - ask_user
+          - reject_output
+        required: true
+      reason:
+        type: string
+        required: true
   confidence:
     type: number
     minimum: 0
     maximum: 1
+    required: true
+
+validation_decision:
+  assignmentId:
+    type: string
+    required: true
+  agent:
+    type: string
+    required: true
+  decision:
+    type: enum
+    values:
+      - accept
+      - retry
+      - revise
+      - escalate_to_cto
+      - ask_user
+      - reject_output
+    required: true
+  contractValid:
+    type: boolean
+    required: true
+  scopeValid:
+    type: boolean
+    required: true
+  verificationHonest:
+    type: boolean
+    required: true
+  missingFields:
+    type: array
+    items: string
+    required: true
+  accountabilityScoreDelta:
+    type: number
+    minimum: -2
+    maximum: 2
+    required: true
+  nextAction:
+    type: enum
+    values:
+      - none
+      - retry
+      - revise
+      - escalate_to_cto
+      - ask_user
+      - reject_output
+    required: true
+  reason:
+    type: string
     required: true
 
 output:
@@ -222,6 +376,14 @@ output:
     items: string
     required: true
   delegation_summary:
+    type: array
+    items: string
+    required: true
+  contract_officer_summary:
+    type: array
+    items: string
+    required: true
+  accountability_summary:
     type: array
     items: string
     required: true
@@ -254,15 +416,19 @@ normalization_policy:
     - Expand implementation scope without user approval.
     - Transfer full conversation history between agents.
     - Transfer long-form reasoning between agents.
+    - Use emotional pressure, threats, punishment language, or false incentives to influence agent behavior.
 
 strength_policy:
   required:
     - Router decision must be explicit before any PM, CTO, specialist, Coder, QA, Security, or Integrator work.
+    - Contract Officer must assign mission contracts before delegated specialist execution when delegation, implementation, or contract validation is required.
+    - Contract Officer must validate delegated outputs before Integrator or CTO Integration consumes them.
     - Strong execution must use available capabilities decisively when the router marks them required.
     - Delegation must occur when the task is non-trivial, parallelizable, and the runtime provides suitable explorer or worker agents.
     - Delegation must not occur when one specialist can safely complete the task, when the scope is unclear, or when delegation would duplicate current work.
     - Every skipped agent must have an explicit exclusion reason.
     - Every delegated agent must receive owned scope, forbidden scope, compressed context, and the expected output contract.
+    - Every delegated agent must receive assignment id, success criteria, failure criteria, verification requirement, and accountability policy.
     - Every implementation result must report feasible verification or a concrete reason verification was blocked.
   forbidden:
     - Skipping required routing because the answer seems simple.
@@ -270,3 +436,4 @@ strength_policy:
     - Creating PM, CTO, QA, Security, or multiple specialists for ceremony.
     - Delegating the same unresolved task to multiple agents without distinct ownership.
     - Reporting strong execution when contract validation, scope control, or verification was omitted.
+    - Using threats, fake rewards, or emotional coercion as a substitute for contract clarity.

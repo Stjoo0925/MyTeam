@@ -2,7 +2,7 @@
 
 This repository manages a personal MyTeam Orchestrator plugin for Codex.
 
-MyTeam behaves like a token-efficient team orchestrator. It routes every request first, selects Light, Standard, or Deep mode, executes only the required agents, exchanges structured contracts, and validates results conditionally.
+MyTeam behaves like a token-efficient team orchestrator. It routes every request first, selects Light, Standard, or Deep mode, uses a Contract Officer to assign and validate delegated work when needed, executes only the required agents, exchanges structured contracts, and validates results conditionally.
 
 ## Structure
 
@@ -44,9 +44,10 @@ plugins/
           workflows/
             orchestration.md
             registry.json
-          agents/
-            router.md
-            pm.md
+            agents/
+              router.md
+              contract_officer.md
+              pm.md
             cto.md
             frontend.md
             backend.md
@@ -67,16 +68,18 @@ Invoke the skill in Codex like this:
 $team Analyze this requirement from the MyTeam perspective.
 ```
 
-The only direct command is `$team`. Router always runs first. PM, CTO, Frontend, Backend, Architect, Domain, QA, Security, Coder, Integrator, and Skill Evaluator are internal roles selected by `$team` only when needed.
+The only direct command is `$team`. Router always runs first. Contract Officer, PM, CTO, Frontend, Backend, Architect, Domain, QA, Security, Coder, Integrator, and Skill Evaluator are internal roles selected by `$team` only when needed.
 
 ## Operating Principles
 
 - Always run Router first.
+- Use Contract Officer to assign and validate delegated work when delegation, implementation, or contract validation is required.
 - Use Light Mode for simple requests with one specialist and no PM or CTO.
 - Use Standard Mode for medium-complexity work with PM summary, required specialists, context trimming, and basic validation.
 - Use Deep Mode only for high-risk or large-scale work with CTO coordination, conditional QA or Security, full contract validation, and retry policies.
 - Select only the specialist roles that are necessary.
 - Exchange structured contracts instead of raw conversational outputs.
+- Use accountability scoring as an internal routing signal; do not use emotional threats, punishment language, or fake rewards.
 - Compress context before every inter-agent handoff.
 - Use the Coder role only when code changes are required.
 - The Coder role edits only the assigned files or modules and runs feasible verification commands.

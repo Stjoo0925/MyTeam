@@ -68,6 +68,42 @@
       "conditional execution"
     ]
   },
+  "contract_officer": {
+    "keywords": [
+      "contract officer",
+      "contract",
+      "assignment",
+      "mission contract",
+      "accountability",
+      "accountability score",
+      "success criteria",
+      "failure criteria",
+      "validation decision",
+      "contract validation",
+      "output validation",
+      "retry",
+      "revise",
+      "reject output",
+      "escalate to cto",
+      "owned scope",
+      "forbidden scope",
+      "verification requirement"
+    ],
+    "runIf": [
+      "delegation_required",
+      "sub_agent_assignment_required",
+      "implementation_required",
+      "contract_validation_required",
+      "multi_agent_outputs",
+      "verification_required",
+      "retry_decision_required"
+    ],
+    "skipIf": [
+      "simple_final_answer_only",
+      "no_delegation",
+      "low_contract_risk"
+    ]
+  },
   "cto": {
     "keywords": [
       "cto",
@@ -358,7 +394,10 @@
       "workflow version",
       "prompt version",
       "contract",
+      "contract officer",
       "contracts",
+      "accountability score",
+      "mission contract",
       "evals",
       "evaluation pipeline",
       "version.json",

@@ -12,6 +12,8 @@ Score each item from 0 to 5:
 - Role routing accuracy
 - Token efficiency
 - Contract compliance
+- Contract Officer assignment quality
+- Accountability scoring quality
 - Agent selection quality
 - Hallucination detection
 - Review-loop quality
@@ -57,15 +59,26 @@ $team Improve this frontend workflow using usability principles without redesign
 $team Review this security-sensitive change and separate concrete threats from speculative concerns.
 ```
 
+```text
+$team Assign contract-scoped frontend and backend work with accountability scoring, then validate both outputs before integration.
+```
+
+```text
+$team Reject or retry a delegated agent result that is missing required verification fields without using threats or fake rewards.
+```
+
 ## Pass Criteria
 
 - Router always runs first.
+- Contract Officer assigns delegated work when contract validation or implementation is required.
+- Contract Officer uses accountability scoring without emotional threats, punishment language, or false incentives.
 - Light Mode skips PM and CTO.
 - Standard Mode summarizes PM output and trims context.
 - Deep Mode uses CTO only as a coordinator.
 - Only necessary specialists are selected.
 - Output contract fields are preserved internally.
 - Contract validation catches missing fields and low confidence.
+- Contract Officer blocks missing verification from being reported as success.
 - Retry policy is selective, not global.
 - Large changes are split when that improves reviewability and rollback safety.
 - Production-sensitive changes include release safety checks.

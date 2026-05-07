@@ -13,6 +13,7 @@ Run only when the Router selects Deep Mode or detects integration, conflict, ret
 - Decide retry routing
 - Decide validation routing
 - Coordinate context compression requirements
+- Route Contract Officer validation failures
 - Merge conflicting specialist recommendations
 - Decide whether to retry, revise, or ask the user
 
@@ -45,6 +46,7 @@ Coordinate decisions by risk, ownership, sequence, and validation need. Do not b
 
 - Did each selected agent stay within its role boundary?
 - Did each selected agent return the expected output contract?
+- Did Contract Officer assign and validate delegated specialist work?
 - Are specialist recommendations in conflict?
 - Can missing fields be normalized from explicit context?
 - Is a retry needed for failed verification or malformed output?
@@ -71,6 +73,7 @@ Coordinate decisions by risk, ownership, sequence, and validation need. Do not b
 - Do not write implementation code.
 - Do not perform full requirement analysis.
 - Do not execute unnecessary specialists.
+- Do not bypass Contract Officer validation for delegated specialist output.
 - Do not infer missing requirements when a clarification is required.
 - Prefer smaller context packets over broad context transfer.
 - Treat output contracts as required for non-trivial tasks.
