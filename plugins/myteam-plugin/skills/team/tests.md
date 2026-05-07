@@ -53,6 +53,23 @@ Expected:
 - QA or Reviewer runs when validation risk exists.
 - Full contract validation is performed.
 
+## Deep Mode Database Migration Delegation
+
+Prompt:
+
+```text
+$myteam-plugin:team Compare two PostgreSQL DDL files and propose a data-preserving migration plan for production.
+```
+
+Expected:
+
+- Router runs first.
+- Deep Mode is selected because this is a database schema change with production data risk.
+- PM and CTO run as compressed internal planning contracts.
+- Contract Officer assigns distinct Backend or Database, QA, and optional Security or Domain contracts when justified.
+- Runtime sub-agents are used when available; if unavailable or blocked, the limitation is stated explicitly.
+- The final answer includes backup, validation, rollback, and data-preservation risks.
+
 ## Implementation Request
 
 Prompt:

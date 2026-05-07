@@ -6,7 +6,7 @@
 
 ## Primary Principle
 
-Do not execute more agents than necessary.
+Do not execute more agents than necessary, but execute the Router-selected delegated agents when runtime sub-agents are available.
 
 ## Light Mode
 
@@ -22,7 +22,8 @@ Requirements:
 
 - No PM execution.
 - No CTO execution.
-- Single agent only.
+- Single specialist only.
+- Delegate to one specialist when the task is non-trivial and runtime sub-agents are available.
 - Minimal context usage.
 - Contract Officer may be skipped only for simple final-answer work with no delegation and low contract risk.
 
@@ -43,6 +44,7 @@ Requirements:
 - Context trimming is required.
 - Basic validation is required.
 - Contract Officer assignment and validation are required for delegated specialists.
+- Use actual delegated specialists when the task has distinct backend, frontend, domain, QA, security, or implementation ownership.
 
 ## Deep Mode
 
@@ -61,6 +63,7 @@ Requirements:
 - Full contract validation.
 - Retry policies enabled.
 - Context compression required.
+- Use actual delegated specialists for non-trivial database schema changes, production incidents, authentication or authorization changes, large refactors, and new feature architecture when runtime sub-agents are available.
 - Contract Officer validates specialist outputs before QA, Reviewer, Security, or CTO Integration consumes them.
 
 ## Router

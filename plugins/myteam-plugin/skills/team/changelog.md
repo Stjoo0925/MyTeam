@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.1
+
+- Clarified that `$team` and `$myteam-plugin:team` authorize actual runtime sub-agent delegation when eligible.
+- Prevented token-efficiency rules from collapsing non-trivial team requests into local-only analysis.
+- Added a database migration delegation regression scenario for production data-preservation work.
+
 ## 0.5.0
 
 - Added Contract Officer as a formal orchestration role between Router or CTO planning and delegated specialist execution.

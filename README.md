@@ -2,7 +2,7 @@
 
 This repository manages a personal MyTeam Orchestrator plugin for Codex.
 
-MyTeam behaves like a token-efficient team orchestrator. It routes every request first, selects Light, Standard, or Deep mode, uses a Contract Officer to assign and validate delegated work when needed, executes only the required agents, exchanges structured contracts, and validates results conditionally.
+MyTeam behaves like a token-efficient team orchestrator. It routes every request first, selects Light, Standard, or Deep mode, uses a Contract Officer to assign and validate delegated work when needed, executes only the required runtime agents, exchanges structured contracts, and validates results conditionally.
 
 ## Structure
 
@@ -68,12 +68,13 @@ Invoke the skill in Codex like this:
 $team Analyze this requirement from the MyTeam perspective.
 ```
 
-The only direct command is `$team`. Router always runs first. Contract Officer, PM, CTO, Frontend, Backend, Architect, Domain, QA, Security, Coder, Integrator, and Skill Evaluator are internal roles selected by `$team` only when needed.
+The direct command is `$team`; plugin invocation such as `$myteam-plugin:team` has the same orchestration intent. Router always runs first. For non-trivial analysis, multi-file comparison, database migration planning, implementation, verification, review, and impact analysis, MyTeam delegates to the smallest sufficient set of runtime sub-agents when they are available. Contract Officer, PM, CTO, Frontend, Backend, Architect, Domain, QA, Security, Coder, Integrator, and Skill Evaluator are internal roles selected only when needed.
 
 ## Operating Principles
 
 - Always run Router first.
 - Use Contract Officer to assign and validate delegated work when delegation, implementation, or contract validation is required.
+- Do not treat token efficiency as permission to skip eligible sub-agent delegation for non-trivial `$team` work.
 - Use Light Mode for simple requests with one specialist and no PM or CTO.
 - Use Standard Mode for medium-complexity work with PM summary, required specialists, context trimming, and basic validation.
 - Use Deep Mode only for high-risk or large-scale work with CTO coordination, conditional QA or Security, full contract validation, and retry policies.
