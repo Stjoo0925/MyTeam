@@ -91,7 +91,22 @@ Router output contract:
   "requiresCTO": false,
   "requiresQA": false,
   "requiresSecurity": false,
-  "tokenBudget": "low"
+  "tokenBudget": "low",
+  "executionStrength": "strong",
+  "delegation": {
+    "shouldDelegate": false,
+    "allowedAgentType": "none",
+    "maxSubAgents": 0,
+    "reason": "Single specialist can safely complete the task.",
+    "skipReason": "Delegation would add overhead without distinct ownership."
+  },
+  "overuseGuard": {
+    "singleAgentSufficient": true,
+    "excludedAgents": ["pm", "cto", "backend", "qa", "security"],
+    "exclusionReasons": ["No cross-role coordination, backend change, regression risk, or security scope was detected."],
+    "scopeLimit": "Only the isolated frontend label change is in scope."
+  },
+  "reason": "Small isolated frontend fix."
 }
 ```
 
@@ -198,11 +213,25 @@ Default agent result contract:
 ```json
 {
   "agent": "backend",
+  "role": "backend",
   "status": "success",
   "summary": "",
+  "ownedScope": [],
+  "forbiddenScope": [],
   "filesToModify": [],
   "risks": [],
   "requiresOtherAgents": [],
+  "verification": {
+    "performed": true,
+    "commands": [],
+    "result": "passed",
+    "remainingGaps": []
+  },
+  "contractCompliance": {
+    "valid": true,
+    "missingFields": [],
+    "normalizations": []
+  },
   "confidence": 0.92
 }
 ```
@@ -222,10 +251,13 @@ Use `contracts/router-decision.schema.json`, `contracts/agent-result.schema.json
 When sub-agents can be created, follow these rules:
 
 - Run Router first.
+- Treat Router-selected required roles and capability use as binding unless a newer user instruction, tool limitation, or contract failure makes them invalid.
 - Do not run PM, CTO, QA, Reviewer, Security, or multiple specialists unless the selected execution mode requires them.
 - In Light Mode, delegate to only one specialist.
 - Prefer `explorer` when only codebase investigation is needed.
 - Use `worker` when implementation, verification, or file edits are needed.
+- Delegate when the task is non-trivial, parallelizable, has distinct ownership, and the runtime provides suitable sub-agents.
+- Do not delegate when one specialist can safely complete the task, when the scope is unclear, or when delegation would duplicate current work.
 - Each delegated prompt must include role name, focus scope, forbidden scope, and expected output format.
 - Each delegated prompt must reference the expected input and output contract.
 - Each delegated prompt must include compressed context only.

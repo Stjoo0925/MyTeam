@@ -1,6 +1,6 @@
 name: team-orchestration
-version: 2.0.0
-description: Contract for MyTeam Router, optional PM, conditional CTO, specialist, validation, integration, and final response flow.
+version: 2.1.0
+description: Strong contract for MyTeam Router, optional PM, conditional CTO, specialist, validation, delegation, integration, and final response flow.
 
 input:
   requirement_spec:
@@ -61,10 +61,77 @@ router_decision:
       - medium
       - high
     required: true
+  executionStrength:
+    type: enum
+    values:
+      - minimal
+      - normal
+      - strong
+    required: true
+    description: Strong execution requires explicit routing, contract validation, feasible verification, and eligible delegation without exceeding the overuse guard.
+  delegation:
+    type: object
+    required: true
+    fields:
+      shouldDelegate:
+        type: boolean
+        required: true
+      allowedAgentType:
+        type: enum
+        values:
+          - none
+          - explorer
+          - worker
+          - explorer_and_worker
+        required: true
+      maxSubAgents:
+        type: number
+        minimum: 0
+        maximum: 6
+        required: true
+      reason:
+        type: string
+        required: true
+      skipReason:
+        type: string
+        required: true
+  overuseGuard:
+    type: object
+    required: true
+    fields:
+      singleAgentSufficient:
+        type: boolean
+        required: true
+      excludedAgents:
+        type: array
+        items: string
+        required: true
+      exclusionReasons:
+        type: array
+        items: string
+        required: true
+      scopeLimit:
+        type: string
+        required: true
 
 agent_result:
   agent:
     type: string
+    required: true
+  role:
+    type: enum
+    values:
+      - pm
+      - cto
+      - frontend
+      - backend
+      - architect
+      - domain
+      - qa
+      - security
+      - coder
+      - integrator
+      - skill_evaluator
     required: true
   status:
     type: enum
@@ -76,6 +143,14 @@ agent_result:
     required: true
   summary:
     type: string
+    required: true
+  ownedScope:
+    type: array
+    items: string
+    required: true
+  forbiddenScope:
+    type: array
+    items: string
     required: true
   filesToModify:
     type: array
@@ -89,6 +164,44 @@ agent_result:
     type: array
     items: string
     required: true
+  verification:
+    type: object
+    required: true
+    fields:
+      performed:
+        type: boolean
+        required: true
+      commands:
+        type: array
+        items: string
+        required: true
+      result:
+        type: enum
+        values:
+          - passed
+          - failed
+          - not_run
+          - blocked
+        required: true
+      remainingGaps:
+        type: array
+        items: string
+        required: true
+  contractCompliance:
+    type: object
+    required: true
+    fields:
+      valid:
+        type: boolean
+        required: true
+      missingFields:
+        type: array
+        items: string
+        required: true
+      normalizations:
+        type: array
+        items: string
+        required: true
   confidence:
     type: number
     minimum: 0
@@ -101,6 +214,14 @@ output:
     items: string
     required: true
   assigned_agents:
+    type: array
+    items: string
+    required: true
+  skipped_agents:
+    type: array
+    items: string
+    required: true
+  delegation_summary:
     type: array
     items: string
     required: true
@@ -133,3 +254,19 @@ normalization_policy:
     - Expand implementation scope without user approval.
     - Transfer full conversation history between agents.
     - Transfer long-form reasoning between agents.
+
+strength_policy:
+  required:
+    - Router decision must be explicit before any PM, CTO, specialist, Coder, QA, Security, or Integrator work.
+    - Strong execution must use available capabilities decisively when the router marks them required.
+    - Delegation must occur when the task is non-trivial, parallelizable, and the runtime provides suitable explorer or worker agents.
+    - Delegation must not occur when one specialist can safely complete the task, when the scope is unclear, or when delegation would duplicate current work.
+    - Every skipped agent must have an explicit exclusion reason.
+    - Every delegated agent must receive owned scope, forbidden scope, compressed context, and the expected output contract.
+    - Every implementation result must report feasible verification or a concrete reason verification was blocked.
+  forbidden:
+    - Skipping required routing because the answer seems simple.
+    - Treating internal roles as optional when the router selected them.
+    - Creating PM, CTO, QA, Security, or multiple specialists for ceremony.
+    - Delegating the same unresolved task to multiple agents without distinct ownership.
+    - Reporting strong execution when contract validation, scope control, or verification was omitted.

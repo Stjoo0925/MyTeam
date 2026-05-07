@@ -3,25 +3,105 @@
   "$id": "https://example.com/myteam/agent-result.schema.json",
   "title": "AgentResult",
   "type": "object",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "success"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "contractCompliance": {
+            "properties": {
+              "valid": {
+                "const": true
+              }
+            }
+          },
+          "confidence": {
+            "minimum": 0.7
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification": {
+            "properties": {
+              "result": {
+                "const": "failed"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "enum": ["failed", "blocked", "needs_clarification"]
+          }
+        }
+      }
+    }
+  ],
   "required": [
     "agent",
+    "role",
     "status",
     "summary",
+    "ownedScope",
+    "forbiddenScope",
     "filesToModify",
     "risks",
     "requiresOtherAgents",
+    "verification",
+    "contractCompliance",
     "confidence"
   ],
   "properties": {
     "agent": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "pm",
+        "cto",
+        "frontend",
+        "backend",
+        "architect",
+        "domain",
+        "qa",
+        "security",
+        "coder",
+        "integrator",
+        "skill_evaluator"
+      ]
     },
     "status": {
       "type": "string",
       "enum": ["success", "blocked", "failed", "needs_clarification"]
     },
     "summary": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1
+    },
+    "ownedScope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbiddenScope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "filesToModify": {
       "type": "array",
@@ -32,14 +112,80 @@
     "risks": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       }
     },
     "requiresOtherAgents": {
       "type": "array",
       "items": {
-        "type": "string"
-      }
+        "type": "string",
+        "enum": [
+          "pm",
+          "cto",
+          "frontend",
+          "backend",
+          "architect",
+          "domain",
+          "qa",
+          "security",
+          "coder",
+          "integrator",
+          "skill_evaluator"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "verification": {
+      "type": "object",
+      "required": ["performed", "commands", "result", "remainingGaps"],
+      "properties": {
+        "performed": {
+          "type": "boolean"
+        },
+        "commands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "result": {
+          "type": "string",
+          "enum": ["passed", "failed", "not_run", "blocked"]
+        },
+        "remainingGaps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "contractCompliance": {
+      "type": "object",
+      "required": ["valid", "missingFields", "normalizations"],
+      "properties": {
+        "valid": {
+          "type": "boolean"
+        },
+        "missingFields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "normalizations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "confidence": {
       "type": "number",

@@ -45,6 +45,20 @@ The Router may use field philosophy anchors to improve classification, but it mu
   "requiresQA": false,
   "requiresSecurity": false,
   "tokenBudget": "low",
+  "executionStrength": "strong",
+  "delegation": {
+    "shouldDelegate": false,
+    "allowedAgentType": "none",
+    "maxSubAgents": 0,
+    "reason": "Single specialist can safely complete the task.",
+    "skipReason": "Delegation would add overhead without distinct ownership."
+  },
+  "overuseGuard": {
+    "singleAgentSufficient": true,
+    "excludedAgents": ["pm", "cto", "backend", "qa", "security"],
+    "exclusionReasons": ["No cross-role coordination, backend change, regression risk, or security scope was detected."],
+    "scopeLimit": "Only the isolated frontend fix is in scope."
+  },
   "reason": ""
 }
 ```
@@ -58,3 +72,6 @@ The Router may use field philosophy anchors to improve classification, but it mu
 - Prefer the smallest self-contained change that preserves user value.
 - Select only agents that are required by the task.
 - Optimize for token efficiency before agent depth.
+- Use `executionStrength: strong` when the user expects MyTeam capabilities to actively operate, but keep the overuse guard binding.
+- Set `delegation.shouldDelegate: true` only when the task is non-trivial, parallelizable, and has distinct ownership for explorer or worker agents.
+- Every skipped role must be listed with a concrete exclusion reason.

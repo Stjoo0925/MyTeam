@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.1
+
+- Strengthened orchestration contracts with explicit execution strength, delegation eligibility, overuse guard, skipped-agent reasons, owned scope, verification, and contract compliance fields.
+- Clarified that strong execution must use required capabilities decisively while forbidding ceremonial or duplicate sub-agent execution.
+
 ## 0.4.0
 
 - Added field philosophy anchors across the orchestrator, engineering benchmark, and role documents.
