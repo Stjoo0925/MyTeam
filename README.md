@@ -51,6 +51,9 @@ Codex에서 사용할 때는 다음처럼 호출합니다.
 $cto 이 요구사항을 CTO 관점으로 분석해줘
 ```
 
+`$cto`는 PM 하위 에이전트를 먼저 실행하고, PM 결과에 따라 필요한 전문 하위 에이전트만 위임한 뒤 결과를 병합하도록 설계되어 있습니다.
+실행 환경에서 sub-agent 도구가 허용되면 `$cto-pm`, `$cto-frontend`, `$cto-backend`, `$cto-architect`, `$cto-domain`, `$cto-qa`, `$cto-skill-evaluator`를 필요한 만큼 선택해 위임합니다.
+
 전문 관점만 직접 사용할 때는 다음처럼 호출합니다.
 
 ```text
