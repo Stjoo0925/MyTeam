@@ -1,0 +1,4 @@
+interface:
+  display_name: "CTO QA"
+  short_description: "엣지 케이스와 실패 복구 검토"
+  default_prompt: "이 기능의 실패 케이스와 복구 흐름을 검토해줘."

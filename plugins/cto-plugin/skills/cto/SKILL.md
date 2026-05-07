@@ -49,10 +49,23 @@ PM 분석
 -> CTO 최종 결정
 ```
 
-## 실제 하위 에이전트 사용 규칙
+## 실제 하위 스킬과 에이전트 사용 규칙
+
+이 플러그인은 아래 전문 스킬을 함께 제공합니다.
+
+- `$cto-pm`
+- `$cto-frontend`
+- `$cto-backend`
+- `$cto-architect`
+- `$cto-domain`
+- `$cto-qa`
+- `$cto-skill-evaluator`
+
+전문 분석만 필요한 요청은 해당 전문 스킬을 직접 사용합니다.
+메인 `$cto`는 PM 분석을 먼저 수행한 뒤 필요한 전문 관점을 선택하고 결과를 병합합니다.
 
 Codex 실행 환경에서 실제 sub-agent 호출은 사용자가 명시적으로 병렬 에이전트 실행, 위임, sub-agent 사용을 요청한 경우에만 수행합니다.
-그 외에는 이 스킬 안에서 PM과 전문 관점을 역할 기반 분석 단계로 수행합니다.
+그 외에는 이 스킬 안에서 전문 스킬의 기준을 역할 기반 분석 단계로 수행합니다.
 
 ## PM Agent
 
@@ -100,6 +113,16 @@ PM 분석 결과를 기반으로 필요한 관점만 선택합니다.
 - `domain`: 측량, GIS, GNSS, SLAM, CAD, 좌표계, 지오이드, 점군, 현장 워크플로우 정확성이 핵심일 때 사용합니다.
 - `qa`: 엣지 케이스, 경쟁 상태, 중복 요청, 재시도, 실패 복구, 잘못된 상태, 부분 장애가 핵심일 때 사용합니다.
 - `skill_evaluator`: 스킬 지침, 라우팅 기준, 출력 형식, 역할 분리, 응답 일관성, 개선 루프를 평가하거나 개선할 때 사용합니다.
+
+직접 호출 가능한 스킬 이름:
+
+- `pm` 관점: `$cto-pm`
+- `frontend` 관점: `$cto-frontend`
+- `backend` 관점: `$cto-backend`
+- `architect` 관점: `$cto-architect`
+- `domain` 관점: `$cto-domain`
+- `qa` 관점: `$cto-qa`
+- `skill_evaluator` 관점: `$cto-skill-evaluator`
 
 ## Frontend Principal Engineer 관점
 
