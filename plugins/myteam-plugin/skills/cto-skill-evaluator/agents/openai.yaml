@@ -1,4 +1,0 @@
-interface:
-  display_name: "CTO Skill Evaluator"
-  short_description: "스킬 행동 품질과 라우팅 평가"
-  default_prompt: "CTO 스킬의 응답 행동을 평가하고 개선점을 제안해줘."

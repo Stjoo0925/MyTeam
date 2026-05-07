@@ -1,0 +1,4 @@
+interface:
+  display_name: "MyTeam"
+  short_description: "PM을 먼저 실행하고 필요한 전문가 팀만 구성"
+  default_prompt: "$team 이 요구사항을 MyTeam 관점으로 분석해줘. PM을 먼저 실행하고 필요한 전문가만 위임해줘."
