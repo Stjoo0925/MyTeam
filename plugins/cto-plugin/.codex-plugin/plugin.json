@@ -1,0 +1,53 @@
+{
+  "name": "cto-plugin",
+  "version": "0.1.0",
+  "description": "개인 CTO Orchestrator 스킬 플러그인",
+  "author": {
+    "name": "[TODO: Author Name]",
+    "email": "[TODO: author@example.com]",
+    "url": "[TODO: https://github.com/author]"
+  },
+  "homepage": "[TODO: https://docs.example.com/plugin]",
+  "repository": "[TODO: https://github.com/author/plugin]",
+  "license": "[TODO: MIT]",
+  "keywords": [
+    "cto",
+    "orchestration",
+    "architecture",
+    "product-planning",
+    "skill-evaluation"
+  ],
+  "skills": "./skills/",
+  "hooks": "[TODO: ./hooks.json]",
+  "mcpServers": "./.mcp.json",
+  "apps": "./.app.json",
+  "interface": {
+    "displayName": "CTO Plugin",
+    "shortDescription": "PM 분석과 전문 관점 라우팅을 수행하는 개인 CTO 스킬",
+    "longDescription": "요구사항을 먼저 PM 관점으로 분석하고, 필요한 전문 관점만 선택해 기술 리스크, MVP 범위, 장기 유지보수 판단을 정리하는 개인 CTO Orchestrator 플러그인입니다.",
+    "developerName": "[TODO: Developer Name]",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Reasoning",
+      "Planning",
+      "Evaluation"
+    ],
+    "websiteURL": "[TODO: https://openai.com/]",
+    "privacyPolicyURL": "[TODO: https://openai.com/policies/row-privacy-policy/]",
+    "termsOfServiceURL": "[TODO: https://openai.com/policies/row-terms-of-use/]",
+    "defaultPrompt": [
+      "이 요구사항을 CTO 관점으로 분석해줘.",
+      "PM 분석 후 필요한 전문 관점만 골라줘.",
+      "이 스킬의 응답 행동을 평가하고 개선점을 제안해줘."
+    ],
+    "brandColor": "#2563EB",
+    "composerIcon": "[TODO: ./assets/icon.png]",
+    "logo": "[TODO: ./assets/logo.png]",
+    "screenshots": [
+      "[TODO: ./assets/screenshot1.png]",
+      "[TODO: ./assets/screenshot2.png]",
+      "[TODO: ./assets/screenshot3.png]"
+    ]
+  }
+}

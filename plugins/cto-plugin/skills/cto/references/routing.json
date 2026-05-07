@@ -1,0 +1,92 @@
+{
+  "frontend": {
+    "keywords": [
+      "ui",
+      "ux",
+      "react",
+      "next",
+      "next.js",
+      "typescript",
+      "tailwind",
+      "component",
+      "state",
+      "accessibility",
+      "responsive",
+      "rendering"
+    ]
+  },
+  "backend": {
+    "keywords": [
+      "api",
+      "database",
+      "db",
+      "postgres",
+      "redis",
+      "auth",
+      "transaction",
+      "queue",
+      "retry",
+      "logging",
+      "docker"
+    ]
+  },
+  "architect": {
+    "keywords": [
+      "architecture",
+      "pipeline",
+      "scaling",
+      "service",
+      "boundary",
+      "event",
+      "integration",
+      "realtime",
+      "upload"
+    ]
+  },
+  "domain": {
+    "keywords": [
+      "survey",
+      "gis",
+      "gnss",
+      "slam",
+      "cad",
+      "coordinate",
+      "geoid",
+      "pointcloud",
+      "cp"
+    ]
+  },
+  "qa": {
+    "keywords": [
+      "validation",
+      "retry",
+      "failure",
+      "edge",
+      "race",
+      "duplicate",
+      "rollback",
+      "recovery",
+      "invalid"
+    ]
+  },
+  "skill_evaluator": {
+    "keywords": [
+      "skill",
+      "prompt",
+      "instruction",
+      "evaluation",
+      "evaluate",
+      "routing",
+      "agent behavior",
+      "output format",
+      "regression",
+      "improvement",
+      "스킬",
+      "지침",
+      "평가",
+      "개선",
+      "라우팅",
+      "응답 품질"
+    ]
+  }
+}
