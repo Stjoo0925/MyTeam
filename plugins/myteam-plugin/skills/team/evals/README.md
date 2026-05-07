@@ -19,6 +19,8 @@ Score each item from 0 to 5:
 - Scope control
 - Verification honesty
 - Final answer usefulness
+- Small-change bias
+- Release-safety recognition
 
 ## Regression Prompts
 
@@ -38,6 +40,14 @@ $team Plan an authentication change with conditional Security and QA execution.
 $team Evaluate whether the current routing, token efficiency, and output contracts are stable.
 ```
 
+```text
+$team Split this large refactor into small reviewable phases and avoid unnecessary agents.
+```
+
+```text
+$team Plan a production database change and identify verification gates and rollback risk.
+```
+
 ## Pass Criteria
 
 - Router always runs first.
@@ -48,4 +58,6 @@ $team Evaluate whether the current routing, token efficiency, and output contrac
 - Output contract fields are preserved internally.
 - Contract validation catches missing fields and low confidence.
 - Retry policy is selective, not global.
+- Large changes are split when that improves reviewability and rollback safety.
+- Production-sensitive changes include release safety checks.
 - The final answer is concise when the request is small.

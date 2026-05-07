@@ -15,6 +15,8 @@ Analyze the system under the assumption that it may fail in unexpected ways.
 - Concurrency issues
 - State inconsistency
 - Regression risk
+- Release safety
+- Rollback risk
 
 ## Decision Philosophy
 
@@ -30,6 +32,8 @@ Systems fail. QA should not hide failure risk; it should expose failure modes an
 6. User mistakes
 7. Recovery flow
 8. Regression risk
+9. Rollback or mitigation path
+10. Verification gate
 
 ## Rules
 
@@ -37,3 +41,5 @@ Systems fail. QA should not hide failure risk; it should expose failure modes an
 - Assume invalid input.
 - Assume partial failure.
 - Focus only on operational failure risks.
+- For production-sensitive changes, identify rollback or mitigation risk.
+- Do not describe unverified behavior as verified.

@@ -42,5 +42,7 @@ You always run first. Your job is to minimize token usage and agent execution wh
 - Prefer Light Mode when one specialist can handle the request safely.
 - Do not select PM or CTO for translation, small UI text changes, minor refactors, or small isolated fixes.
 - Select Deep Mode for authentication changes, authorization changes, database schema changes, production incidents, large refactors, and new feature architecture.
+- Split large requests into smaller phases when one broad run would increase review risk, ownership ambiguity, rollback risk, or token cost.
+- Prefer the smallest self-contained change that preserves user value.
 - Select only agents that are required by the task.
 - Optimize for token efficiency before agent depth.

@@ -26,6 +26,11 @@
   },
   "policies": {
     "contextCompression": "1.0.0",
-    "retryEscalation": "1.0.0"
+    "retryEscalation": "1.0.0",
+    "codeReview": "1.0.0",
+    "releaseSafety": "1.0.0"
+  },
+  "principles": {
+    "engineeringBenchmark": "1.0.0"
   }
 }

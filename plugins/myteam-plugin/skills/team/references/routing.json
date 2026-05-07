@@ -44,7 +44,9 @@
         "large_refactor",
         "new_feature_architecture",
         "security_sensitive",
-        "high_risk_change"
+        "high_risk_change",
+        "release_sensitive",
+        "rollback_risk"
       ],
       "requiresPM": true,
       "requiresCTO": true,
@@ -183,7 +185,9 @@
       "new_feature_architecture",
       "service_boundary_change",
       "large_refactor",
-      "scalability_risk"
+      "scalability_risk",
+      "code_health_risk",
+      "speculative_abstraction_risk"
     ],
     "skipIf": [
       "small_fix",
@@ -246,7 +250,10 @@
       "regression_risk",
       "failure_recovery_required",
       "concurrency_risk",
-      "retry_logic_changed"
+      "retry_logic_changed",
+      "release_sensitive",
+      "rollback_risk",
+      "production_behavior_change"
     ],
     "skipIf": [
       "light_mode",

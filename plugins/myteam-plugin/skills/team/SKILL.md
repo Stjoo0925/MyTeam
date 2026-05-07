@@ -24,6 +24,7 @@ This skill is versioned through documentation contracts, role versions, workflow
 - Workflow registry: `references/workflows/registry.json`
 - Input/output contracts: `contracts/`
 - Context compression and retry policies: `references/policies/`
+- Engineering benchmark principles: `references/principles/engineering-benchmark.md`
 - Evaluation prompts and criteria: `evals/`
 - Usage examples: `examples.md`
 - Manual test scenarios: `tests.md`
@@ -39,6 +40,15 @@ Priority order:
 3. Contract stability
 4. Scalability
 5. Agent quality
+
+Engineering quality guardrails:
+
+- Prefer one small, self-contained change over one broad change.
+- Avoid speculative architecture and unused abstractions.
+- Keep code health from declining even in small changes.
+- Pair risky behavior changes with appropriate verification.
+- Update documentation when behavior, usage, release, or operational flow changes.
+- Use evals and regression prompts when prompt, workflow, contract, or role behavior changes.
 
 ## Router-First Execution
 
@@ -71,6 +81,8 @@ Router output contract:
 ```
 
 The Router must prioritize token minimization. If a request can be completed by one specialist without PM or CTO, use Light Mode.
+
+Router must also prefer splitting large requests into smaller self-contained phases when one broad execution would cause unnecessary agents, unclear ownership, or high review risk.
 
 ## Execution Modes
 
@@ -128,6 +140,7 @@ Requirements:
 - Full contract validation is required.
 - Retry policies are enabled.
 - Context compression is mandatory between all agent handoffs.
+- Deep Mode must include an explicit rollback, release, or operational safety consideration when production behavior changes.
 
 ## Default Roles
 
@@ -221,6 +234,18 @@ Example conditions:
 
 Routing conditions are defined in `references/routing.json`.
 
+## Engineering Benchmark Rules
+
+Apply these public engineering-practice-inspired rules without claiming access to private company processes:
+
+- Small change bias: choose smaller scoped changes when they preserve user value and reduce review risk.
+- Code review quality: validate design, functionality, complexity, tests, naming, comments, docs, security, accessibility, and rollback risk only when relevant to the selected mode.
+- DevOps safety: for release-sensitive changes, identify verification gates, staging impact, rollout risk, and rollback path.
+- UX consistency: for frontend changes, check hierarchy, consistency, accessibility, platform conventions, and responsive behavior.
+- Eval discipline: for prompt, workflow, contract, routing, or agent changes, update regression prompts and evaluation criteria.
+
+Detailed guidance lives in `references/principles/engineering-benchmark.md`.
+
 ## CTO Restrictions
 
 The CTO is a coordinator only.
@@ -278,6 +303,7 @@ Retry rules:
 - Default maximum retries: 2.
 - Escalate to CTO only when the selected mode allows CTO or when retry failure creates integration risk.
 - Do not retry when the requirement is ambiguous; ask the user.
+- Do not retry by broadening scope; split the task or ask the user.
 
 ## Coder Execution Rules
 

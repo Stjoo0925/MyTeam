@@ -35,8 +35,12 @@ plugins/
         references/
           routing.json
           policies/
+            code-review.md
             context-compression.md
+            release-safety.md
             retry-escalation.md
+          principles/
+            engineering-benchmark.md
           workflows/
             orchestration.md
             registry.json
@@ -90,6 +94,7 @@ The only direct command is `$team`. Router always runs first. PM, CTO, Frontend,
 - Workflow guidance lives in `plugins/myteam-plugin/skills/team/references/workflows/`.
 - Input/output contracts live in `plugins/myteam-plugin/skills/team/contracts/`.
 - Context compression and retry policies live in `plugins/myteam-plugin/skills/team/references/policies/`.
+- Engineering benchmark principles live in `plugins/myteam-plugin/skills/team/references/principles/`.
 - Evaluation prompts and scoring rules live in `plugins/myteam-plugin/skills/team/evals/`.
 - Routing keywords live in `plugins/myteam-plugin/skills/team/references/routing.json`.
 - Plugin registration metadata lives in `plugins/myteam-plugin/.codex-plugin/plugin.json`.

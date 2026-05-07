@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.1
+
+- Added public engineering benchmark principles for small changes, code review quality, DevOps release safety, UX consistency, and eval discipline.
+- Added code review and release safety policies.
+- Strengthened Router rules for small self-contained changes and phased execution.
+- Expanded Frontend, QA, and evaluation guidance with UX consistency, rollback risk, and release verification checks.
+
 ## 0.3.0
 
 - Added Router-first execution.
