@@ -68,12 +68,12 @@ Invoke the skill in Codex like this:
 $team Analyze this requirement from the MyTeam perspective.
 ```
 
-The direct command is `$team`; plugin invocation such as `$myteam-plugin:team` has the same orchestration intent. Router always runs first. For non-trivial analysis, multi-file comparison, database migration planning, implementation, verification, review, and impact analysis, MyTeam delegates to the smallest sufficient set of runtime sub-agents when they are available. Contract Officer, PM, CTO, Frontend, Backend, Architect, Domain, QA, Security, Coder, Integrator, and Skill Evaluator are internal roles selected only when needed.
+The direct command is `$team`; plugin invocation such as `$myteam-plugin:team` has the same orchestration intent. 길잡이 (`router`) always runs first. For non-trivial analysis, multi-file comparison, database migration planning, implementation, verification, review, and impact analysis, MyTeam delegates to the smallest sufficient set of runtime sub-agents when they are available. 약속지기 (`contract_officer`), 그림잡이 (`pm`), 판짜기장 (`cto`), 화면마술사 (`frontend`), 엔진장인 (`backend`), 구조연금술사 (`architect`), 현장박사 (`domain`), 빈틈탐정 (`qa`), 문지기 (`security`), 뚝딱장인 (`coder`), 매듭장이 (`integrator`), and 거울감별사 (`skill_evaluator`) are internal roles selected only when needed.
 
 ## Operating Principles
 
-- Always run Router first.
-- Use Contract Officer to assign and validate delegated work when delegation, implementation, or contract validation is required.
+- Always run 길잡이 (`router`) first.
+- Use 약속지기 (`contract_officer`) to assign and validate delegated work when delegation, implementation, or contract validation is required.
 - Do not treat token efficiency as permission to skip eligible sub-agent delegation for non-trivial `$team` work.
 - Use Light Mode for simple requests with one specialist and no PM or CTO.
 - Use Standard Mode for medium-complexity work with PM summary, required specialists, context trimming, and basic validation.
@@ -82,8 +82,8 @@ The direct command is `$team`; plugin invocation such as `$myteam-plugin:team` h
 - Exchange structured contracts instead of raw conversational outputs.
 - Use accountability scoring as an internal routing signal; do not use emotional threats, punishment language, or fake rewards.
 - Compress context before every inter-agent handoff.
-- Use the Coder role only when code changes are required.
-- The Coder role edits only the assigned files or modules and runs feasible verification commands.
+- Use the 뚝딱장인 (`coder`) role only when code changes are required.
+- The 뚝딱장인 (`coder`) role edits only the assigned files or modules and runs feasible verification commands.
 - Preserve the team orchestration contract for non-trivial tasks.
 - For code review, impact analysis, architectural bottlenecks, and technical debt analysis, check whether `code-review-graph` tools are available.
 - Before the final response, verify that the result does not exceed the user's requested scope.

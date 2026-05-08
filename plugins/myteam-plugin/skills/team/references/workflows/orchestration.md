@@ -68,11 +68,11 @@ Requirements:
 
 ## Router
 
-Router detects complexity, task type, token cost, execution mode, and required agents.
+길잡이 (`router`) detects complexity, task type, token cost, execution mode, and required agents.
 
 ## Contract Officer
 
-Contract Officer runs after Router or CTO planning when delegation, implementation, or contract validation is required.
+약속지기 (`contract_officer`) runs after 길잡이 (`router`) or 판짜기장 (`cto`) planning when delegation, implementation, or contract validation is required.
 
 - Assign mission contracts
 - Define success and failure criteria
@@ -86,7 +86,7 @@ Contract Officer must not use emotional threats, punishment language, false rewa
 
 ## CTO Orchestration
 
-CTO runs only in Deep Mode or when the Router or Contract Officer detects integration, conflict, retry, or validation-routing risk.
+판짜기장 (`cto`) runs only in Deep Mode or when 길잡이 (`router`) or 약속지기 (`contract_officer`) detects integration, conflict, retry, or validation-routing risk.
 
 - Select agents
 - Sequence agents
@@ -98,6 +98,18 @@ CTO runs only in Deep Mode or when the Router or Contract Officer detects integr
 ## Specialist Agents
 
 Specialists run only when required by PM and CTO results. Each specialist must receive:
+
+Use these display names in human-facing labels while preserving internal contract keys:
+
+- 화면마술사 (`frontend`)
+- 엔진장인 (`backend`)
+- 구조연금술사 (`architect`)
+- 현장박사 (`domain`)
+- 빈틈탐정 (`qa`)
+- 문지기 (`security`)
+- 뚝딱장인 (`coder`)
+- 매듭장이 (`integrator`)
+- 거울감별사 (`skill_evaluator`)
 
 - Assignment id
 - Role name

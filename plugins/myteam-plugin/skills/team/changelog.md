@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added playful Korean display names for MyTeam roles while preserving stable internal contract keys.
+
 ## 0.5.1
 
 - Clarified that `$team` and `$myteam-plugin:team` authorize actual runtime sub-agent delegation when eligible.

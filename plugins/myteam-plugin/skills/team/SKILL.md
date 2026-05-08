@@ -186,19 +186,21 @@ Requirements:
 
 ## Default Roles
 
-- `Router`: Always runs first. Selects Light, Standard, or Deep mode; estimates token cost; selects required agents; and minimizes execution.
-- `Contract Officer`: Runs after Router or CTO planning when delegation, implementation, or contract validation is involved. Assigns mission contracts, applies accountability scoring, validates outputs, and chooses retry, revision, escalation, clarification, or rejection.
-- `PM`: Runs only in Standard or Deep mode. Clarifies user goals, hidden requirements, operational constraints, failure cases, MVP scope, and required specialist roles.
-- `CTO`: Runs only when the Router selects Deep mode or the Router or Contract Officer detects integration risk. Coordinates agent selection, workflow sequencing, conflict detection, result integration, retry decisions, and validation routing.
-- `Frontend`: Use only for UI/UX, component structure, state management, accessibility, responsive behavior, and rendering performance.
-- `Backend`: Use only for APIs, databases, transactions, authentication, authorization, caching, queues, retries, logging, and operational stability.
-- `Architect`: Use only for service boundaries, module separation, event flow, scalability, and integration structure.
-- `Domain`: Use only for surveying, GIS, GNSS, SLAM, CAD, coordinate systems, geoid handling, and field workflow correctness.
-- `QA`: Use conditionally for edge cases, race conditions, duplicate requests, retry failures, rollback, recovery, and regression risk.
-- `Security`: Use conditionally for authentication, authorization, secrets, permissions, injection risk, data exposure, and production security risk.
-- `Coder`: Use only when actual file changes are required. It handles implementation, verification, and revision after failures within a scoped ownership boundary.
-- `Integrator`: Merges Contract Officer-validated outputs into the final decision. In Light Mode, the orchestrator may perform this directly without a separate agent.
-- `Skill Evaluator`: Use only to evaluate skill behavior, routing, output format, and sub-agent delegation rules.
+Use the playful display names in user-facing summaries and assignment labels, while preserving the stable internal role keys in structured contracts and schemas.
+
+- `길잡이` (`router`): Always runs first. Selects Light, Standard, or Deep mode; estimates token cost; selects required agents; and minimizes execution.
+- `약속지기` (`contract_officer`): Runs after Router or CTO planning when delegation, implementation, or contract validation is involved. Assigns mission contracts, applies accountability scoring, validates outputs, and chooses retry, revision, escalation, clarification, or rejection.
+- `그림잡이` (`pm`): Runs only in Standard or Deep mode. Clarifies user goals, hidden requirements, operational constraints, failure cases, MVP scope, and required specialist roles.
+- `판짜기장` (`cto`): Runs only when the Router selects Deep mode or the Router or Contract Officer detects integration risk. Coordinates agent selection, workflow sequencing, conflict detection, result integration, retry decisions, and validation routing.
+- `화면마술사` (`frontend`): Use only for UI/UX, component structure, state management, accessibility, responsive behavior, and rendering performance.
+- `엔진장인` (`backend`): Use only for APIs, databases, transactions, authentication, authorization, caching, queues, retries, logging, and operational stability.
+- `구조연금술사` (`architect`): Use only for service boundaries, module separation, event flow, scalability, and integration structure.
+- `현장박사` (`domain`): Use only for surveying, GIS, GNSS, SLAM, CAD, coordinate systems, geoid handling, and field workflow correctness.
+- `빈틈탐정` (`qa`): Use conditionally for edge cases, race conditions, duplicate requests, retry failures, rollback, recovery, and regression risk.
+- `문지기` (`security`): Use conditionally for authentication, authorization, secrets, permissions, injection risk, data exposure, and production security risk.
+- `뚝딱장인` (`coder`): Use only when actual file changes are required. It handles implementation, verification, and revision after failures within a scoped ownership boundary.
+- `매듭장이` (`integrator`): Merges Contract Officer-validated outputs into the final decision. In Light Mode, the orchestrator may perform this directly without a separate agent.
+- `거울감별사` (`skill_evaluator`): Use only to evaluate skill behavior, routing, output format, and sub-agent delegation rules.
 
 Role-specific details are available under `references/agents/`. Routing keywords are available in `references/routing.json`. Contracts are available under `contracts/`.
 
@@ -419,27 +421,27 @@ Retry rules:
 - Do not retry when the requirement is ambiguous; ask the user.
 - Do not retry by broadening scope; split the task or ask the user.
 
-## Coder Execution Rules
+## 뚝딱장인 Execution Rules
 
-Use the Coder only when implementation or modification is required.
+Use 뚝딱장인 (`coder`) only when implementation or modification is required.
 
-Coder execution conditions:
+뚝딱장인 execution conditions:
 
 - The user asks for implementation, modification, refactoring, bug fixing, or test improvement.
 - Router, PM, or specialist analysis determines that file changes are required.
 - The edit scope and basic verification method are sufficiently clear.
 
-Coder prohibition conditions:
+뚝딱장인 prohibition conditions:
 
 - The requirement is unclear and should be clarified first.
 - The architecture direction is undecided and implementation would be speculative.
 - The edit scope is not defined and unrelated files could be touched.
 - The change requires unsafe temporary bypass code.
 
-Coder delegation prompts must include:
+뚝딱장인 delegation prompts must include:
 
 ```text
-Perform this change as the MyTeam Coder role.
+Perform this change as the MyTeam 뚝딱장인 (`coder`) role.
 Owned scope: <files or modules that may be edited>
 Forbidden scope: <files or areas that must not be touched>
 
