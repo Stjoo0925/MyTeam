@@ -89,9 +89,6 @@
           },
           "contractOfficerMode": {
             "const": "assign_and_validate"
-          },
-          "requiresContractOfficer": {
-            "const": true
           }
         }
       }
@@ -289,6 +286,36 @@
       "type": "string",
       "enum": ["minimal", "normal", "strong"],
       "description": "How forcefully the selected workflow should execute. Strong means required routing, contracts, validation, and eligible delegation must be applied, while still respecting overuse limits."
+    },
+    "executionPattern": {
+      "type": "string",
+      "enum": ["direct_response", "agent_loop", "wide_parallel", "scheduled", "monitoring"],
+      "description": "Optional agentic execution pattern. Use direct_response for answer-only work; use agent_loop, wide_parallel, scheduled, or monitoring when the task requires action, state, automation, or synthesis."
+    },
+    "executionSurface": {
+      "type": "string",
+      "enum": ["none", "local_workspace", "local_browser", "cloud_browser", "external_connector", "automation", "mixed"],
+      "description": "Optional execution surface required by the task. Use none for answer-only work."
+    },
+    "requiresApprovalGate": {
+      "type": "boolean",
+      "description": "Whether the task requires explicit approval before browser, connector, authenticated, destructive, purchase, posting, messaging, or cross-workspace action."
+    },
+    "requiresPersistentState": {
+      "type": "boolean",
+      "description": "Whether task state or a checkpoint should be preserved for resumability."
+    },
+    "requiresArtifactManifest": {
+      "type": "boolean",
+      "description": "Whether created or modified deliverables must be listed in an artifact manifest."
+    },
+    "requiresScheduling": {
+      "type": "boolean",
+      "description": "Whether the task should route to delayed, recurring, heartbeat, or monitoring automation when available."
+    },
+    "requiresWideParallelism": {
+      "type": "boolean",
+      "description": "Whether the task has enough independent repeated items to justify wide parallel or batched processing."
     },
     "delegation": {
       "type": "object",

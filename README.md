@@ -2,7 +2,9 @@
 
 This repository manages a personal MyTeam Orchestrator plugin for Codex.
 
-MyTeam behaves like a token-efficient team orchestrator. It routes every request first, selects Light, Standard, or Deep mode, uses a Contract Officer to assign and validate delegated work when needed, executes only the required runtime agents, exchanges structured contracts, and validates results conditionally.
+MyTeam behaves like a token-efficient execution orchestrator. It routes every request first, selects Light, Standard, or Deep mode, classifies whether the task needs direct response, agent loop, wide parallel processing, scheduling, or monitoring, uses a Contract Officer to assign and validate delegated work when needed, executes only the required runtime agents, exchanges structured contracts, and validates results conditionally.
+
+For actionable requests, MyTeam is expected to plan, act with available tools, observe results, verify the outcome, track artifacts, and keep checkpoints when the work may continue later.
 
 ## Structure
 
@@ -35,6 +37,7 @@ plugins/
         references/
           routing.json
           policies/
+            agentic-execution.md
             code-review.md
             context-compression.md
             release-safety.md
@@ -68,11 +71,17 @@ Invoke the skill in Codex like this:
 $team Analyze this requirement from the MyTeam perspective.
 ```
 
-The direct command is `$team`; plugin invocation such as `$myteam-plugin:team` has the same orchestration intent. 길잡이 (`router`) always runs first. For non-trivial analysis, multi-file comparison, database migration planning, implementation, verification, review, and impact analysis, MyTeam delegates to the smallest sufficient set of runtime sub-agents when they are available. 약속지기 (`contract_officer`), 그림잡이 (`pm`), 판짜기장 (`cto`), 화면마술사 (`frontend`), 엔진장인 (`backend`), 구조연금술사 (`architect`), 현장박사 (`domain`), 빈틈탐정 (`qa`), 문지기 (`security`), 뚝딱장인 (`coder`), 매듭장이 (`integrator`), and 거울감별사 (`skill_evaluator`) are internal roles selected only when needed.
+The direct command is `$team`; plugin invocation such as `$myteam-plugin:team` has the same orchestration intent. 길잡이 (`router`) always runs first. For non-trivial analysis, multi-file comparison, database migration planning, implementation, verification, review, impact analysis, browser or connector work, scheduled follow-up, and wide parallel processing, MyTeam delegates to the smallest sufficient set of runtime sub-agents when they are available. 약속지기 (`contract_officer`), 그림잡이 (`pm`), 판짜기장 (`cto`), 화면마술사 (`frontend`), 엔진장인 (`backend`), 구조연금술사 (`architect`), 현장박사 (`domain`), 빈틈탐정 (`qa`), 문지기 (`security`), 뚝딱장인 (`coder`), 매듭장이 (`integrator`), and 거울감별사 (`skill_evaluator`) are internal roles selected only when needed.
 
 ## Operating Principles
 
 - Always run 길잡이 (`router`) first.
+- Classify execution pattern and execution surface for actionable work.
+- Use a plan-act-observe-verify loop for implementation, browser, connector, shell, artifact, and automation work.
+- Require approval before authenticated browser, connector, destructive, purchase, posting, messaging, or cross-workspace actions.
+- Maintain action logs, artifact manifests, and checkpoints when relevant.
+- Use Wide Parallel only for many independent items that can be sharded and synthesized safely.
+- Route delayed, recurring, follow-up, and monitoring requests to automation when available.
 - Use 약속지기 (`contract_officer`) to assign and validate delegated work when delegation, implementation, or contract validation is required.
 - Do not treat token efficiency as permission to skip eligible sub-agent delegation for non-trivial `$team` work.
 - Use Light Mode for simple requests with one specialist and no PM or CTO.
@@ -97,7 +106,7 @@ The direct command is `$team`; plugin invocation such as `$myteam-plugin:team` h
 - Role-specific guidance lives in `plugins/myteam-plugin/skills/team/references/agents/`.
 - Workflow guidance lives in `plugins/myteam-plugin/skills/team/references/workflows/`.
 - Input/output contracts live in `plugins/myteam-plugin/skills/team/contracts/`.
-- Context compression and retry policies live in `plugins/myteam-plugin/skills/team/references/policies/`.
+- Agentic execution, context compression, release safety, code review, and retry policies live in `plugins/myteam-plugin/skills/team/references/policies/`.
 - Engineering benchmark principles live in `plugins/myteam-plugin/skills/team/references/principles/`.
 - Evaluation prompts and scoring rules live in `plugins/myteam-plugin/skills/team/evals/`.
 - Routing keywords live in `plugins/myteam-plugin/skills/team/references/routing.json`.
@@ -117,7 +126,7 @@ MyTeam follows Semantic Versioning for skill and contract changes.
 An example personal plugin cache location recognized by the Codex app:
 
 ```text
-C:\Users\{userName}\.codex\plugins\cache\personal-plugins\myteam-plugin\0.4.0
+C:\Users\{userName}\.codex\plugins\cache\personal-plugins\myteam-plugin\0.6.0
 ```
 
 The marketplace file is managed relative to the cache root:

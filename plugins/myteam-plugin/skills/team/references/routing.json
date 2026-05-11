@@ -54,6 +54,127 @@
       "tokenBudget": "high"
     }
   },
+  "executionPatterns": {
+    "direct_response": {
+      "runIf": [
+        "answer_only",
+        "analysis_only",
+        "no_tool_action_required",
+        "simple_final_answer_only"
+      ],
+      "requiresApprovalGate": false,
+      "requiresPersistentState": false
+    },
+    "agent_loop": {
+      "runIf": [
+        "action_required",
+        "tool_use_required",
+        "implementation_required",
+        "verification_required",
+        "artifact_required",
+        "multi_step_workflow"
+      ],
+      "requiresPersistentState": true
+    },
+    "wide_parallel": {
+      "runIf": [
+        "many_independent_items",
+        "batch_processing",
+        "large_scale_research",
+        "bulk_extraction",
+        "bulk_generation",
+        "parallel_shards"
+      ],
+      "requiresWideParallelism": true
+    },
+    "scheduled": {
+      "runIf": [
+        "scheduled_task",
+        "delayed_execution",
+        "recurring_task",
+        "run_later",
+        "follow_up_later"
+      ],
+      "requiresScheduling": true,
+      "executionSurface": "automation"
+    },
+    "monitoring": {
+      "runIf": [
+        "monitoring",
+        "watch_for_changes",
+        "keep_an_eye_on",
+        "periodic_check",
+        "notify_when_changed"
+      ],
+      "requiresScheduling": true,
+      "executionSurface": "automation"
+    }
+  },
+  "executionSurfaces": {
+    "local_workspace": {
+      "keywords": [
+        "file",
+        "workspace",
+        "shell",
+        "test",
+        "build",
+        "commit",
+        "pull request",
+        "artifact"
+      ]
+    },
+    "local_browser": {
+      "keywords": [
+        "my browser",
+        "local browser",
+        "logged in",
+        "authenticated site",
+        "active tab",
+        "captcha",
+        "session"
+      ],
+      "requiresApprovalGate": true
+    },
+    "cloud_browser": {
+      "keywords": [
+        "cloud browser",
+        "browse",
+        "web workflow",
+        "click",
+        "fill form",
+        "extract from website"
+      ],
+      "requiresApprovalGate": true
+    },
+    "external_connector": {
+      "keywords": [
+        "gmail",
+        "email",
+        "slack",
+        "calendar",
+        "github",
+        "notion",
+        "database",
+        "connector",
+        "send",
+        "post",
+        "update external record"
+      ],
+      "requiresApprovalGate": true
+    },
+    "automation": {
+      "keywords": [
+        "schedule",
+        "scheduled",
+        "recurring",
+        "heartbeat",
+        "remind",
+        "monitor",
+        "check back"
+      ],
+      "requiresApprovalGate": false
+    }
+  },
   "router": {
     "keywords": [
       "route",
@@ -65,7 +186,13 @@
       "token efficiency",
       "token minimization",
       "agent selection",
-      "conditional execution"
+      "conditional execution",
+      "execution pattern",
+      "execution surface",
+      "approval gate",
+      "artifact manifest",
+      "checkpoint",
+      "action log"
     ]
   },
   "contract_officer": {

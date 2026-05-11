@@ -2,10 +2,21 @@
 
 ## Unreleased
 
-- Added playful Korean display names for MyTeam roles while preserving stable internal contract keys.
+- No unreleased changes.
+
+## 0.6.0
+
+- Added Manus-like agentic execution routing with `direct_response`, `agent_loop`, `wide_parallel`, `scheduled`, and `monitoring` patterns.
+- Added execution surface classification for local workspace, local browser, cloud browser, external connector, automation, and mixed execution.
+- Added approval-gate, action-log, artifact-manifest, checkpoint, wide-parallel, scheduling, and monitoring contract guidance.
+- Added `references/policies/agentic-execution.md` for plan-act-observe-verify execution, safety boundaries, and resumable state.
+- Extended Router, Contract Officer, CTO, Coder, Integrator, and Skill Evaluator role guidance for tool-using execution.
+- Expanded evals, examples, and manual tests for browser approval, wide parallel processing, scheduled monitoring, artifacts, and checkpoints.
+- Synchronized plugin metadata, skill version, workflow version, contract version, and deployment version at `0.6.0`.
 
 ## 0.5.1
 
+- Added playful Korean display names for MyTeam roles while preserving stable internal contract keys.
 - Clarified that `$team` and `$myteam-plugin:team` authorize actual runtime sub-agent delegation when eligible.
 - Prevented token-efficiency rules from collapsing non-trivial team requests into local-only analysis.
 - Added a database migration delegation regression scenario for production data-preservation work.

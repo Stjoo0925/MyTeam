@@ -1,5 +1,5 @@
 name: team-orchestration
-version: 2.3.0
+version: 2.4.0
 description: Strong contract for MyTeam Router, Contract Officer, optional PM, conditional CTO, specialist, validation, delegation, integration, and final response flow.
 
 input:
@@ -80,6 +80,43 @@ router_decision:
       - strong
     required: true
     description: Strong execution requires explicit routing, contract validation, feasible verification, and eligible delegation without exceeding the overuse guard.
+  executionPattern:
+    type: enum
+    values:
+      - direct_response
+      - agent_loop
+      - wide_parallel
+      - scheduled
+      - monitoring
+    required: false
+    description: Agentic execution pattern. Use agent_loop for actionable tasks, wide_parallel for independent repeated items, and scheduled or monitoring for automation requests.
+  executionSurface:
+    type: enum
+    values:
+      - none
+      - local_workspace
+      - local_browser
+      - cloud_browser
+      - external_connector
+      - automation
+      - mixed
+    required: false
+    description: Surface where execution happens. Browser, connector, automation, and mixed surfaces require explicit safety handling.
+  requiresApprovalGate:
+    type: boolean
+    required: false
+  requiresPersistentState:
+    type: boolean
+    required: false
+  requiresArtifactManifest:
+    type: boolean
+    required: false
+  requiresScheduling:
+    type: boolean
+    required: false
+  requiresWideParallelism:
+    type: boolean
+    required: false
   delegation:
     type: object
     required: true
@@ -183,6 +220,36 @@ mandatory_quality_gates:
     must_equal: true
     failure_action: revise
     description: Conditional data-loss, migration, security, or production-regression risks must be promoted to findings instead of buried after a no-issues statement.
+  actionable_work_uses_agent_loop:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: revise
+    description: Actionable work must have goal, plan, action, observation, verification, and stopping condition unless routed as direct_response.
+  approval_before_external_side_effect:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: ask_user
+    description: Browser, connector, authenticated, destructive, purchase, posting, messaging, or cross-workspace actions require approval before execution.
+  artifact_manifest_current:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: revise
+    description: Created or modified deliverables must be listed in the artifact manifest with status.
+  checkpoint_for_resumable_work:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: revise
+    description: Long-running, scheduled, interrupted, or resumable work must record the last verified step, next action, and remaining risks.
+  wide_parallel_independence_verified:
+    type: boolean
+    required: true
+    must_equal: true
+    failure_action: reject_output
+    description: Wide parallel work must prove item independence and validate outputs before synthesis.
   final_decision_present:
     type: boolean
     required: true
@@ -223,6 +290,21 @@ contract_officer_assignment:
     type: array
     items: string
     required: true
+  executionSurface:
+    type: string
+    required: false
+  approvalRequirement:
+    type: array
+    items: string
+    required: false
+  artifactRequirement:
+    type: array
+    items: string
+    required: false
+  checkpointRequirement:
+    type: array
+    items: string
+    required: false
   accountabilityPolicy:
     type: object
     required: true
@@ -378,6 +460,146 @@ agent_result:
     minimum: 0
     maximum: 1
     required: true
+  executionTrace:
+    type: object
+    required: false
+    fields:
+      pattern:
+        type: enum
+        values:
+          - direct_response
+          - agent_loop
+          - wide_parallel
+          - scheduled
+          - monitoring
+        required: true
+      surface:
+        type: enum
+        values:
+          - none
+          - local_workspace
+          - local_browser
+          - cloud_browser
+          - external_connector
+          - automation
+          - mixed
+        required: true
+      actions:
+        type: array
+        items: string
+        required: true
+      approvals:
+        type: array
+        items: string
+        required: true
+      checkpoint:
+        type: string
+        required: true
+  artifactManifest:
+    type: array
+    items:
+      type: object
+      fields:
+        pathOrId:
+          type: string
+          required: true
+        kind:
+          type: enum
+          values:
+            - file
+            - report
+            - asset
+            - commit
+            - pull_request
+            - automation
+            - external_record
+            - none
+          required: true
+        status:
+          type: enum
+          values:
+            - created
+            - modified
+            - verified
+            - blocked
+            - not_applicable
+          required: true
+    required: false
+
+agentic_execution:
+  goal:
+    type: string
+    required: true
+  plan:
+    type: array
+    items: string
+    required: true
+  current_step:
+    type: string
+    required: true
+  observations:
+    type: array
+    items: string
+    required: true
+  verification_method:
+    type: array
+    items: string
+    required: true
+  stopping_condition:
+    type: string
+    required: true
+  checkpoint:
+    type: object
+    required: true
+    fields:
+      last_verified_step:
+        type: string
+        required: true
+      next_action:
+        type: string
+        required: true
+      remaining_risks:
+        type: array
+        items: string
+        required: true
+
+wide_parallel_plan:
+  item_source:
+    type: string
+    required: false
+  item_count:
+    type: number
+    required: false
+  independence_reason:
+    type: string
+    required: false
+  shard_policy:
+    type: array
+    items: string
+    required: false
+  synthesis_schema:
+    type: string
+    required: false
+
+schedule_plan:
+  schedule_type:
+    type: enum
+    values:
+      - one_time
+      - recurring
+      - heartbeat
+      - monitor
+      - none
+    required: false
+  trigger:
+    type: string
+    required: false
+  output_destination:
+    type: string
+    required: false
+  failure_notification:
+    type: string
+    required: false
 
 validation_decision:
   assignmentId:
@@ -465,6 +687,22 @@ output:
     type: array
     items: string
     required: true
+  action_log_summary:
+    type: array
+    items: string
+    required: true
+  artifact_manifest:
+    type: array
+    items: string
+    required: true
+  checkpoint_summary:
+    type: array
+    items: string
+    required: true
+  approvals:
+    type: array
+    items: string
+    required: true
   remaining_risks:
     type: array
     items: string
@@ -499,6 +737,10 @@ normalization_policy:
     - Invent verification results.
     - Treat failed tool calls as successful.
     - Treat timed-out, unavailable, rejected, or malformed delegated outputs as successful.
+    - Execute browser, connector, authenticated, destructive, purchase, posting, messaging, or cross-workspace actions without approval.
+    - Omit action logs for browser, connector, shell, file, automation, or external-service actions.
+    - Omit artifact manifests for deliverables.
+    - Omit checkpoints for long-running, scheduled, interrupted, or resumable work.
     - Say no important issue was found when conditional data loss, migration failure, security exposure, or production regression remains possible.
     - Expand implementation scope without user approval.
     - Transfer full conversation history between agents.
@@ -511,6 +753,13 @@ strength_policy:
     - Contract Officer must assign mission contracts before delegated specialist execution when delegation, implementation, or contract validation is required.
     - Contract Officer must validate delegated outputs before Integrator or CTO Integration consumes them.
     - Strong execution must use available capabilities decisively when the router marks them required.
+    - Actionable work must use plan-act-observe-verify execution unless routed as direct_response.
+    - Router must classify executionPattern and executionSurface when tool use, automation, browser, connector, artifacts, or persistent state are relevant.
+    - Browser, connector, authenticated, destructive, purchase, posting, messaging, or cross-workspace actions must pass an approval gate before execution.
+    - Every tool-using run must preserve an action-log summary.
+    - Deliverable-producing runs must include an artifact manifest.
+    - Resumable, scheduled, interrupted, or long-running runs must include a checkpoint summary.
+    - Wide parallel runs must verify independent work items and synthesize only validated outputs.
     - Delegation must occur when the task is non-trivial, parallelizable, and the runtime provides suitable explorer or worker agents.
     - Delegation must not occur when the task is simple final-answer work, when the scope is unclear, or when delegation would duplicate current work.
     - Every skipped agent must have an explicit exclusion reason.
@@ -528,6 +777,9 @@ strength_policy:
     - Creating PM, CTO, QA, Security, or multiple specialists for ceremony.
     - Delegating the same unresolved task to multiple agents without distinct ownership.
     - Reporting strong execution when contract validation, scope control, or verification was omitted.
+    - Treating answer-only orchestration as equivalent to completed action when tools were required.
+    - Using browser, connector, automation, or authenticated sessions without approval.
+    - Claiming scheduled or monitored work was created when automation was unavailable or blocked.
     - Reporting a timed-out or unavailable delegated agent as successful validation.
     - Burying conditional data-loss, migration, security, or production-regression risk after a no-issues statement.
     - Using threats, fake rewards, or emotional coercion as a substitute for contract clarity.

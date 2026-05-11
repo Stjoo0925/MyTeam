@@ -243,6 +243,60 @@
       },
       "additionalProperties": false
     },
+    "executionTrace": {
+      "type": "object",
+      "required": ["pattern", "surface", "actions", "approvals", "checkpoint"],
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "enum": ["direct_response", "agent_loop", "wide_parallel", "scheduled", "monitoring"]
+        },
+        "surface": {
+          "type": "string",
+          "enum": ["none", "local_workspace", "local_browser", "cloud_browser", "external_connector", "automation", "mixed"]
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "approvals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "checkpoint": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "artifactManifest": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["pathOrId", "kind", "status"],
+        "properties": {
+          "pathOrId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "enum": ["file", "report", "asset", "commit", "pull_request", "automation", "external_record", "none"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["created", "modified", "verified", "blocked", "not_applicable"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
     "contractCompliance": {
       "type": "object",
       "required": ["valid", "missingFields", "normalizations"],

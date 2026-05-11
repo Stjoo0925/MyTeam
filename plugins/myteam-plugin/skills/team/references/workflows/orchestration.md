@@ -2,11 +2,13 @@
 
 ## Workflow Version
 
-`3.1.0`
+`3.2.0`
 
 ## Primary Principle
 
 Do not execute more agents than necessary, but execute the Router-selected delegated agents when runtime sub-agents are available.
+
+For actionable requests, MyTeam must execute through a plan-act-observe-verify loop instead of stopping at advice. If execution is blocked by scope, approval, missing tools, or policy, the final response must say what was blocked and what state is ready to resume.
 
 ## Light Mode
 
@@ -66,9 +68,52 @@ Requirements:
 - Use actual delegated specialists for non-trivial database schema changes, production incidents, authentication or authorization changes, large refactors, and new feature architecture when runtime sub-agents are available.
 - Contract Officer validates specialist outputs before QA, Reviewer, Security, or CTO Integration consumes them.
 
+## Agentic Execution Pattern
+
+Attach this pattern to any mode when the task requires action, browser or connector use, file changes, automation, generated artifacts, or resumable work.
+
+Flow:
+
+```text
+Router -> Execution Pattern Selection -> Contract Officer when needed -> Plan -> Act -> Observe -> Verify -> Artifact / Checkpoint -> Final Response
+```
+
+Requirements:
+
+- Router classifies `executionPattern` and `executionSurface`.
+- The team lead keeps a current goal, plan, observation list, verification method, and stopping condition.
+- Contract Officer assigns approval, artifact, and checkpoint requirements when delegation or validation is required.
+- Tool-using work keeps an action-log summary.
+- Deliverable-producing work keeps an artifact manifest.
+- Long-running, interrupted, scheduled, or resumable work keeps a checkpoint.
+
+## Wide Parallel Pattern
+
+Use for many independent repeated items.
+
+Flow:
+
+```text
+Router -> PM when needed -> Contract Officer -> Sharded Specialists -> Validation -> Integrator Synthesis -> Final Response
+```
+
+Requirements:
+
+- Do not use for sequential workflows.
+- State the item source, item count, independence reason, shard policy, and synthesis schema.
+- Each shard receives a narrow context and writes only to its owned output scope.
+- Timed-out, unavailable, malformed, or rejected shard outputs are excluded from verified synthesis.
+
+## Browser, Connector, And Automation Surfaces
+
+- `local_browser` and `cloud_browser` require approval before interaction with logged-in accounts, forms, postings, messages, bookings, purchases, or sensitive data.
+- `external_connector` requires approval before sending or changing external records unless the user explicitly requested that exact action.
+- `automation` is used for delayed, recurring, follow-up, or monitoring requests when the runtime provides automation support.
+- If a requested surface is unavailable, mark the action blocked and continue only with safe preparation or planning.
+
 ## Router
 
-길잡이 (`router`) detects complexity, task type, token cost, execution mode, and required agents.
+길잡이 (`router`) detects complexity, task type, token cost, execution mode, execution pattern, execution surface, required agents, approval gates, artifact needs, state needs, and scheduling needs.
 
 ## Contract Officer
 
@@ -78,6 +123,7 @@ Requirements:
 - Define success and failure criteria
 - Define owned scope and forbidden scope
 - Attach required output contracts and verification requirements
+- Attach execution surface, approval, action-log, artifact, and checkpoint requirements when relevant
 - Apply accountability scoring as an internal routing signal
 - Validate outputs before integration
 - Choose retry, revise, escalate, ask user, or reject output when validation fails
@@ -134,6 +180,8 @@ Validation is mode-dependent:
 ## Context Compression
 
 Every inter-agent handoff must pass compressed context only.
+
+Action logs, artifact manifests, and checkpoints should be summarized before handoff. Do not pass raw browser transcripts, full command output, or full conversation history unless a selected specialist explicitly needs a narrow excerpt.
 
 ## Retry Policy
 

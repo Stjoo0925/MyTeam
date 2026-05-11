@@ -1,7 +1,7 @@
 {
   "name": "myteam-plugin",
-  "version": "0.5.0",
-  "description": "Token-efficient MyTeam Orchestrator skill plugin",
+  "version": "0.6.0",
+  "description": "Token-efficient MyTeam execution orchestrator skill plugin",
   "author": {
     "name": "Personal",
     "email": "personal@example.com",
@@ -21,14 +21,16 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "MyTeam",
-    "shortDescription": "Routes first, minimizes agents, and uses contract-based Light, Standard, or Deep execution.",
-    "longDescription": "Acts as a token-efficient team orchestrator. It runs a lightweight Router first, selects Light, Standard, or Deep mode, uses a Contract Officer to assign and validate delegated work when needed, executes only required roles among PM, CTO, Frontend, Backend, Architect, Domain, QA, Security, Coder, Integrator, and Skill Evaluator, compresses context before handoff, validates structured contracts, applies selective retry policy, and produces a concise final decision.",
+    "shortDescription": "Routes first, minimizes agents, and executes through contracts, tools, artifacts, checkpoints, or automation when needed.",
+    "longDescription": "Acts as a token-efficient execution orchestrator. It runs a lightweight Router first, selects Light, Standard, or Deep mode, classifies direct response, agent loop, wide parallel, scheduled, or monitoring execution, uses a Contract Officer to assign and validate delegated work when needed, executes only required roles among PM, CTO, Frontend, Backend, Architect, Domain, QA, Security, Coder, Integrator, and Skill Evaluator, gates external side effects through approval, tracks action logs, artifacts, and checkpoints, compresses context before handoff, validates structured contracts, applies selective retry policy, and produces a concise final decision.",
     "developerName": "Personal",
     "category": "Productivity",
     "capabilities": [
       "Interactive",
       "Reasoning",
       "Planning",
+      "Tool Use",
+      "Automation",
       "Evaluation"
     ],
     "websiteURL": "https://github.com/Stjoo0925/MyTeam",
@@ -37,6 +39,7 @@
     "defaultPrompt": [
       "$team Route this request, choose Light, Standard, or Deep mode, execute only required agents, and provide the final team decision.",
       "$team Use the smallest sufficient orchestration path and exchange only structured contracts between agents.",
+      "$team Execute actionable work through plan, act, observe, verify, artifact manifest, and checkpoint when tools are available.",
       "$team Evaluate routing accuracy, token efficiency, contract validation, and unnecessary agent execution."
     ],
     "brandColor": "#2563EB",
